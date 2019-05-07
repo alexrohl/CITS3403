@@ -4,7 +4,7 @@
       <title>{{ title }} - Microblog</title>
       {% else %}
       <title>Welcome to Microblog</title>
-      <!--{% endif %}-->
+      {% endif %}
     </head>
     <body>
         <div>
@@ -14,8 +14,7 @@
             <a href="{{ url_for('login') }}">Login</a>
             {% else %}
             <a href="{{ url_for('logout') }}">Logout</a>
-            {% endif %}
-            <a href="{{ url_for('results') }}">Logout</a>
+            <a href="{{ url_for('results') }}">Results</a>
             {% endif %}
         </div>
 
