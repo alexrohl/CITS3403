@@ -12,16 +12,16 @@
             {% endfor %}
         </p>
         <p>
-            {{ form.character_alpha.label }}<br>
-            {{ form.character_alpha(size=64) }}<br>
-            {% for error in form.character_alpha.errors %}
+            {{ form.alpha_character.label }}<br>
+            {{ form.alpha_character(size=64) }}<br>
+            {% for error in form.alpha_character.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.character_beta.label }}<br>
-            {{ form.character_beta(size=32) }}<br>
-            {% for error in form.character_beta.errors %}
+            {{ form.beta_character.label }}<br>
+            {{ form.beta_character(size=32) }}<br>
+            {% for error in form.beta_character.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>

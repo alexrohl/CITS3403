@@ -53,6 +53,7 @@ def register():
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
+        print(user)
         db.session.add(user)
         db.session.commit()
         flash('Congratulations, you are now a registered user!')
@@ -61,7 +62,7 @@ def register():
 
 @app.route('/results', methods=['GET','POST'])
 def results():
-    results = Votes.to_json
+    results = [vote.to_json() for vote in User.query.all()]
     '''
     results = [
         {
@@ -88,7 +89,7 @@ def results():
 def createpoll():
     form = CreatePollForm()
     if form.validate_on_submit():
-        poll = Polls(user_id=user.username,
+        poll = Polls(user_id=current_user.username,
                      metric=form.metric.data)
         db.session.add(poll)
         db.session.commit()
@@ -100,12 +101,17 @@ def createpoll():
 def vote():
     form = VotingForm()
     if form.validate_on_submit():
-        vote = Votes(user_id=user.username,
-                     metric=form.metric.data,
-                     alpha_character = form.alpha_character.data,
-                     beta_character = form.beta_character.data)
-        db.session.add(vote)
+        new_vote = Votes(
+                         user_id=current_user.id,
+                         alpha_character=form.alpha_character.data,
+                         beta_character=form.beta_character.data,
+                         metric=form.metric.data)
+
+        db.session.add((1,1,'a','a','a'))
         db.session.commit()
         flash('Vote submitted!')
+    else:
+        print('fail')
+        print(form.errors)
 
     return render_template('vote.html', title='Vote', form=form)

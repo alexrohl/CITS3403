@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
-from app.models import User, Results
+from app.models import User, Results, Polls
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -28,13 +28,11 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('Please use a different email address.')
 
 class VotingForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
     metric = StringField('Metric', validators=[DataRequired()])
-    character_alpha = StringField('Alpha Character', validators=[DataRequired()])
-    character_beta = StringField('Beta Character', validators=[DataRequired()])
+    alpha_character = StringField('Alpha Character', validators=[DataRequired()])
+    beta_character = StringField('Beta Character', validators=[DataRequired()])
     submit = SubmitField('Vote!')
 
 class CreatePollForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
     metric = StringField('Metric', validators=[DataRequired()])
     submit = SubmitField('Submit Poll')

@@ -21,6 +21,13 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+    def to_json(self):
+        return {
+            'username': self.username,
+            'email': self.email,
+            'password_hash': self.password_hash,
+            }
+
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
@@ -42,9 +49,12 @@ class Results(db.Model):
 class Votes(db.Model):
         id = db.Column(db.Integer, primary_key=True)
         user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-        alpha_character = db.Column(db.String(140), db.ForeignKey('results.character'))
-        beta_character = db.Column(db.String(140), db.ForeignKey('results.character'))
-        metric = db.Column(db.String(140), db.ForeignKey('results.metric'))
+        alpha_character = db.Column(db.String(140), index=True)
+        beta_character = db.Column(db.String(140), index=True)
+        metric = db.Column(db.String(140), index=True)
+
+        def __repr__(self):
+            return '<Vote {}>'.format(self.id)
 
         def to_json(self):
             return {
