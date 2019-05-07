@@ -57,3 +57,24 @@ def register():
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
+@app.route('/results', methods=['POST'])
+def results():
+    results = [
+        {
+            'character': 'Iron Man',
+            'metric': 'Strength',
+            'score': 1000
+        },
+        {
+            'character': 'Iron Man',
+            'metric': 'Speed',
+            'score': 1200
+        },
+        {
+            'character': 'Thor',
+            'metric': 'Strength',
+            'score': 2000
+        }
+    ]
+    return render_template('results.html', title='Results Page', results = results)

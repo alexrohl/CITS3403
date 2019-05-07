@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Results of our polls!</h1>
+    {% for result in results %}
+    <div><p>{{ result.character }} has a {{ result.metric }} score of {{ result.score }}.</p></div>
+    {% endfor %}
+{% endblock %}
