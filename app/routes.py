@@ -1,8 +1,9 @@
-from flask import render_template, flash, redirect, url_for, request
+from os import getenv
+from flask import render_template, flash, redirect, url_for, request, Blueprint, request, jsonify, session
 from app import app, db
-from app.forms import LoginForm, RegistrationForm
+from app.forms import LoginForm, RegistrationForm, CreatePollForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Results
+from app.models import User, Results, Polls
 from werkzeug.urls import url_parse
 
 @app.route('/')
@@ -78,3 +79,31 @@ def results():
         }
     ]
     return render_template('results.html', title='Results Page', results = results)
+
+# retrieves/adds polls from/to the database
+@app.route('/createpoll', methods=['GET', 'POST'])
+def createpoll():
+    form = CreatePollForm()
+    if form.validate_on_submit():
+        poll = Polls(user_id=user.username,
+                     metric=form.metric.data)
+        db.session.add(poll)
+        db.session.commit()
+        flash('Poll created!')
+
+    return render_template('createpoll.html', title='Polls', form=form)
+
+@app.route('/vote', methods=['GET', 'POST'])
+def vote():
+    form = VotingForm()
+    if form.validate_on_submit():
+        vote = Votes(user_id=user.username,
+                     metric=form.metric.data,
+                     alpha_character = form.alpha_character.data,
+                     beta_character = form.beta_character.data)
+        db.session.add(vote)
+        db.session.commit()
+        flash('Vote submitted!')
+
+    return render_template('vote.html', title='Vote', form=form)
+'''
