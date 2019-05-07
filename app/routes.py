@@ -1,4 +1,5 @@
-from flask import render_template, flash, redirect, url_for, request
+from os import getenv
+from flask import render_template, flash, redirect, url_for, request, Blueprint, request, jsonify, session
 from app import app, db
 from app.forms import LoginForm, RegistrationForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -78,3 +79,19 @@ def results():
         }
     ]
     return render_template('results.html', title='Results Page', results = results)
+
+# retrieves/adds polls from/to the database
+@app.route('/polls', methods=['GET', 'POST'])
+def polls():
+    form = VotingForm()
+    if form.validate_on_submit():
+        vote = Votes(user_id=form.username.data,
+                     metric=form.metric.data,
+                     alpha_character = form.alpha_character.data,
+                     beta_character = form.beta_character.data)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Congratulations, you are now a registered user!')
+
+    return render_template('polls.html', title='Polls', form=form)

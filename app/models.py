@@ -2,6 +2,8 @@ from datetime import datetime
 from app import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy import select, func
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -36,6 +38,20 @@ class Results(db.Model):
 
     def __repr__(self):
         return '<Results {}>'.format(self.character)
+
+class Votes(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+        alpha_character = db.Column(db.String(140), db.ForeignKey('results.character'))
+        beta_character = db.Column(db.String(140), db.ForeignKey('results.character'))
+        metric = db.Column(db.String(140), db.ForeignKey('results.metric'))
+
+class Polls(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+        metric = db.Column(db.String(140), db.ForeignKey('results.metric'))
+
+
 
 @login.user_loader
 def load_user(id):
