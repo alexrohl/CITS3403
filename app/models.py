@@ -46,6 +46,13 @@ class Votes(db.Model):
         beta_character = db.Column(db.String(140), db.ForeignKey('results.character'))
         metric = db.Column(db.String(140), db.ForeignKey('results.metric'))
 
+        def to_json(self):
+            return {
+                'metric': self.metric,
+                'alpha_character': self.alpha_character,
+                'beta_character': self.beta_character,
+                }
+
 class Polls(db.Model):
         id = db.Column(db.Integer, primary_key=True)
         user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
