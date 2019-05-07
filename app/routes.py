@@ -1,9 +1,9 @@
 from os import getenv
 from flask import render_template, flash, redirect, url_for, request, Blueprint, request, jsonify, session
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, CreatePollForm
+from app.forms import LoginForm, RegistrationForm, CreatePollForm, VotingForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Results, Polls
+from app.models import User, Results, Polls, Votes
 from werkzeug.urls import url_parse
 
 @app.route('/')
@@ -61,6 +61,8 @@ def register():
 
 @app.route('/results', methods=['GET','POST'])
 def results():
+    results = Votes.to_json
+    '''
     results = [
         {
             'character': 'Iron Man',
@@ -78,6 +80,7 @@ def results():
             'score': 2000
         }
     ]
+    '''
     return render_template('results.html', title='Results Page', results = results)
 
 # retrieves/adds polls from/to the database
@@ -106,4 +109,3 @@ def vote():
         flash('Vote submitted!')
 
     return render_template('vote.html', title='Vote', form=form)
-'''
