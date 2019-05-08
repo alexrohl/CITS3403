@@ -5,6 +5,7 @@ from app.forms import LoginForm, RegistrationForm, CreatePollForm, VotingForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Results, Polls, Votes
 from werkzeug.urls import url_parse
+import itertools
 
 @app.route('/')
 @app.route('/index')
@@ -63,25 +64,6 @@ def register():
 @app.route('/results', methods=['GET','POST'])
 def results():
     results = [vote.to_json() for vote in Votes.query.all()]
-    '''
-    results = [
-        {
-            'character': 'Iron Man',
-            'metric': 'Strength',
-            'score': 1000
-        },
-        {
-            'character': 'Iron Man',
-            'metric': 'Speed',
-            'score': 1200
-        },
-        {
-            'character': 'Thor',
-            'metric': 'Strength',
-            'score': 2000
-        }
-    ]
-    '''
     return render_template('results.html', title='Results Page', results = results)
 
 # retrieves/adds polls from/to the database
@@ -99,6 +81,12 @@ def createpoll():
 
 @app.route('/vote', methods=['GET', 'POST'])
 def vote():
+    polls = [poll.to_json() for poll in Polls.query.all()]
+    characters = [character.character for character in Results.query.filter_by(metric='speed')]
+    print(1,characters)
+    characters = list(itertools.combinations(characters,2))
+    print(2,characters)
+    print(3,polls)
     form = VotingForm()
     if form.validate_on_submit():
         new_vote = Votes(
@@ -114,4 +102,6 @@ def vote():
         print('fail')
         print(form.errors)
 
-    return render_template('vote.html', title='Vote', form=form)
+    print(polls,results)
+
+    return render_template('vote.html', title='Vote', form=form, polls = polls, characters=characters)

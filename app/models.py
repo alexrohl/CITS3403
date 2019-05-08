@@ -25,7 +25,7 @@ class User(UserMixin, db.Model):
         return {
             'username': self.username,
             'email': self.email,
-            'password_hash': self.password_hash,
+            'password_hash': self.password_hash
             }
 
 class Post(db.Model):
@@ -42,6 +42,14 @@ class Results(db.Model):
     character = db.Column(db.String(140))
     metric = db.Column(db.String(140))
     score = db.Column(db.Integer)
+
+    def to_json(self):
+        return {
+            'id': self.id,
+            'character': self.character,
+            'metric': self.metric,
+            'score': self.score
+            }
 
     def __repr__(self):
         return '<Results {}>'.format(self.character)
@@ -62,13 +70,20 @@ class Votes(db.Model):
                 'user_id': self.user_id,
                 'metric': self.metric,
                 'alpha_character': self.alpha_character,
-                'beta_character': self.beta_character,
+                'beta_character': self.beta_character
                 }
 
 class Polls(db.Model):
         id = db.Column(db.Integer, primary_key=True)
         user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
         metric = db.Column(db.String(140), db.ForeignKey('results.metric'))
+
+        def to_json(self):
+            return {
+                'id': self.id,
+                'user_id': self.user_id,
+                'metric': self.metric,
+                }
 
 
 

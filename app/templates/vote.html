@@ -27,4 +27,15 @@
         </p>
         <p>{{ form.submit() }}</p>
     </form>
+    {% for poll in polls %}
+      {% for character in characters %}
+      <form action="" method="POST">
+          {{ poll.metric }}
+          <input type="radio" name="option" value="original" /> {{ character[0] }}
+          <input type="radio" name="option" value="freq" /> {{ character[1] }}
+          <input type="submit" value="Submit">
+        </form>
+
+      {% endfor %}
+    {% endfor %}
 {% endblock %}
