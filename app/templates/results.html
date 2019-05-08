@@ -4,6 +4,6 @@
     <h1>Results of our polls!</h1>
     {% for result in results %}
     <!-- <div><p>{{ result.character }} has a {{ result.metric }} score of {{ result.score }}.</p></div> -->
-    <div><p>{{ result.username }} has password {{ result.password_hash }}<p><div>
+    <div><p>{{ result.user_id }} ranked {{ result.alpha_character }} above {{ result.beta_character }} in the metric {{ result.metric }}<p><div>
     {% endfor %}
 {% endblock %}

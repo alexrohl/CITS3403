@@ -48,7 +48,7 @@ class Results(db.Model):
 
 class Votes(db.Model):
         id = db.Column(db.Integer, primary_key=True)
-        user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+        user_id = db.Column(db.Integer)
         alpha_character = db.Column(db.String(140), index=True)
         beta_character = db.Column(db.String(140), index=True)
         metric = db.Column(db.String(140), index=True)
@@ -58,6 +58,8 @@ class Votes(db.Model):
 
         def to_json(self):
             return {
+                'id': self.id,
+                'user_id': self.user_id,
                 'metric': self.metric,
                 'alpha_character': self.alpha_character,
                 'beta_character': self.beta_character,

@@ -62,7 +62,7 @@ def register():
 
 @app.route('/results', methods=['GET','POST'])
 def results():
-    results = [vote.to_json() for vote in User.query.all()]
+    results = [vote.to_json() for vote in Votes.query.all()]
     '''
     results = [
         {
@@ -107,7 +107,7 @@ def vote():
                          beta_character=form.beta_character.data,
                          metric=form.metric.data)
 
-        db.session.add((1,1,'a','a','a'))
+        db.session.add(new_vote)
         db.session.commit()
         flash('Vote submitted!')
     else:
