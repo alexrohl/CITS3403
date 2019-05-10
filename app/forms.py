@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, RadioField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 from app.models import User, Results, Polls
 
@@ -31,7 +31,17 @@ class VotingForm(FlaskForm):
     metric = StringField('Metric', validators=[DataRequired()])
     alpha_character = StringField('Alpha Character', validators=[DataRequired()])
     beta_character = StringField('Beta Character', validators=[DataRequired()])
+    radio_button = RadioField('Label', choices=[('value','description'),('value_two','whatever')])
     submit = SubmitField('Vote!')
+
+    def add_button(self, char1, char2, metric):
+        setattr(self, metric, RadioField('Label', choices=[(1,char1),(2,char2)]))
+
+
+
+class VoteForm(FlaskForm):
+    radio_button = RadioField('Label', choices=[(1,'Iron Man'),(2,'Thor')])
+
 
 class CreatePollForm(FlaskForm):
     metric = StringField('Metric', validators=[DataRequired()])

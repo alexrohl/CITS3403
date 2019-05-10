@@ -1,7 +1,7 @@
 from os import getenv
 from flask import render_template, flash, redirect, url_for, request, Blueprint, request, jsonify, session
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, CreatePollForm, VotingForm
+from app.forms import LoginForm, RegistrationForm, CreatePollForm, VotingForm, VoteForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Results, Polls, Votes
 from werkzeug.urls import url_parse
@@ -81,13 +81,18 @@ def createpoll():
 
 @app.route('/vote', methods=['GET', 'POST'])
 def vote():
-    polls = [poll.to_json() for poll in Polls.query.all()]
+    metrics = [poll.metric for poll in Polls.query.all()]
     characters = [character.character for character in Results.query.filter_by(metric='speed')]
-    print(1,characters)
     characters = list(itertools.combinations(characters,2))
-    print(2,characters)
-    print(3,polls)
-    form = VotingForm()
+    print('CHARACTERS',characters)
+    print('METRICS',metrics)
+    form = VoteForm()
+    '''i=0
+    for metric in metrics:
+        for char in characters:
+            form.add_button(char[0],char[1],str(i))
+            i=i+1
+    '''
     if form.validate_on_submit():
         new_vote = Votes(
                          user_id=current_user.id,
@@ -102,6 +107,4 @@ def vote():
         print('fail')
         print(form.errors)
 
-    print(polls,results)
-
-    return render_template('vote.html', title='Vote', form=form, polls = polls, characters=characters)
+    return render_template('vote.html', title='Vote', form=form, metrics=metrics, characters=characters)

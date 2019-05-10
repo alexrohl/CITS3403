@@ -4,6 +4,12 @@
     <h1>Vote!</h1>
     <form action="" method="post">
         {{ form.hidden_tag() }}
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}
+<!--
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
         <p>
             {{ form.metric.label }}<br>
             {{ form.metric(size=32) }}<br>
@@ -25,17 +31,26 @@
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
+        <p>
+            {{ form.radio_button }}
+
+          
+                {{ metric }},{{ character[0] }},{{ character[1] }}
+                {{ form.name }}
+        </p>
         <p>{{ form.submit() }}</p>
     </form>
-    {% for poll in polls %}
-      {% for character in characters %}
+
+      <!--
       <form action="" method="POST">
-          {{ poll.metric }}
-          <input type="radio" name="option" value="original" /> {{ character[0] }}
-          <input type="radio" name="option" value="freq" /> {{ character[1] }}
+          {{ metric }}
+          {{ form.hidden_tag() }}
+          <p>
+            {{ form.radio_button(choices = [(1,2),(3,4)]) }}
+            {{ form.radio_button(description = "what") }}
+          </p>
+          <input type="radio" name="option1" value="1" /> {{ character[0] }}
+          <input type="radio" name="option2" value="2" /> {{ character[1] }}
           <input type="submit" value="Submit">
         </form>
-
-      {% endfor %}
-    {% endfor %}
-{% endblock %}
+        -->
