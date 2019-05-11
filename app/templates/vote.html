@@ -1,56 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% for message in form.radio_button.errors %}
+        <div>{{ message }}</div>
+     {% endfor %}
+
     <h1>Vote!</h1>
     <form action="" method="post">
         {{ form.hidden_tag() }}
+        <br>
+         <div style = font-size:20px; font-weight:bold; margin-left:150px;>
+        {{ form.radio_button.label }}
+        {{ form.radio_button() }}
         <p>{{ form.submit() }}</p>
+        </div>
     </form>
 {% endblock %}
-<!--
-    <form action="" method="post">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.metric.label }}<br>
-            {{ form.metric(size=32) }}<br>
-            {% for error in form.metric.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.alpha_character.label }}<br>
-            {{ form.alpha_character(size=64) }}<br>
-            {% for error in form.alpha_character.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.beta_character.label }}<br>
-            {{ form.beta_character(size=32) }}<br>
-            {% for error in form.beta_character.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.radio_button }}
-
-          
-                {{ metric }},{{ character[0] }},{{ character[1] }}
-                {{ form.name }}
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
-
-      <!--
-      <form action="" method="POST">
-          {{ metric }}
-          {{ form.hidden_tag() }}
-          <p>
-            {{ form.radio_button(choices = [(1,2),(3,4)]) }}
-            {{ form.radio_button(description = "what") }}
-          </p>
-          <input type="radio" name="option1" value="1" /> {{ character[0] }}
-          <input type="radio" name="option2" value="2" /> {{ character[1] }}
-          <input type="submit" value="Submit">
-        </form>
-        -->

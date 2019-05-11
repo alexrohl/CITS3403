@@ -38,9 +38,9 @@ class VotingForm(FlaskForm):
         setattr(self, metric, RadioField('Label', choices=[(1,char1),(2,char2)]))
 
 
-
 class VoteForm(FlaskForm):
-    radio_button = RadioField('Label', choices=[(1,'Iron Man'),(2,'Thor')])
+    radio_button = RadioField('Speed', choices=[(1,'Iron Man'),(2,'Thor')])
+    submit = SubmitField('Vote!')
 
 
 class CreatePollForm(FlaskForm):

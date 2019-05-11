@@ -93,16 +93,36 @@ def vote():
             form.add_button(char[0],char[1],str(i))
             i=i+1
     '''
-    if form.validate_on_submit():
-        new_vote = Votes(
-                         user_id=current_user.id,
-                         alpha_character=form.alpha_character.data,
-                         beta_character=form.beta_character.data,
-                         metric=form.metric.data)
+    if form.is_submitted():
+        first_char = form.radio_button.choices[0][1]
+        second_char = form.radio_button.choices[1][1]
+        print(form.radio_button.data)
+        if int(form.radio_button.data) == 1:
+            new_vote = Votes(
+                             user_id=current_user.id,
+                             alpha_character=first_char,
+                             beta_character=second_char,
+                             metric=form.radio_button.label.text
+                             )
+            print(new_vote)
+            db.session.add(new_vote)
+            db.session.commit()
+            flash('Vote submitted!')
 
-        db.session.add(new_vote)
-        db.session.commit()
-        flash('Vote submitted!')
+        elif int(form.radio_button.data) == 2:
+            new_vote = Votes(
+                             user_id=current_user.id,
+                             alpha_character=second_char,
+                             beta_character=first_char,
+                             metric=form.radio_button.label.text
+                             )
+            print(new_vote)
+            db.session.add(new_vote)
+            db.session.commit()
+            flash('Vote submitted!')
+        else:
+            print('fail')
+
     else:
         print('fail')
         print(form.errors)
