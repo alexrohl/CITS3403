@@ -34,13 +34,25 @@ class VotingForm(FlaskForm):
     radio_button = RadioField('Label', choices=[('value','description'),('value_two','whatever')])
     submit = SubmitField('Vote!')
 
-    def add_button(self, char1, char2, metric):
-        setattr(self, metric, RadioField('Label', choices=[(1,char1),(2,char2)]))
+    def add_button(self, char1, char2, metric, tag):
+        setattr(self, tag, RadioField(metric, choices=[(1,char1),(2,char2)]))
 
 
 class VoteForm(FlaskForm):
-    radio_button = RadioField('Speed', choices=[(1,'Iron Man'),(2,'Thor')])
+    radio_button1 = RadioField('Default', choices=[(1,'Farruh'),(2,'is')])
+    radio_button2 = RadioField('Default', choices=[(1,'a'),(2,'dickhead')])
+    radio_button3 = RadioField('Default', choices=[(1,'F Man'),(2,'For')])
+    radio_button4 = RadioField('Default', choices=[(1,'F Man'),(2,'For')])
+    radio_button5 = RadioField('Default', choices=[(1,'F Man'),(2,'For')])
+    radio_button6 = RadioField('Default', choices=[(1,'F Man'),(2,'For')])
+    radio_button7 = RadioField('Default', choices=[(1,'F Man'),(2,'For')])
+    radio_button8 = RadioField('Default', choices=[(1,'F Man'),(2,'For')])
+    radio_button9 = RadioField('Default', choices=[(1,'F Man'),(2,'For')])
+    radio_button10 = RadioField('Default', choices=[(1,'F Man'),(2,'For')])
+
     submit = SubmitField('Vote!')
+
+
 
 
 class CreatePollForm(FlaskForm):

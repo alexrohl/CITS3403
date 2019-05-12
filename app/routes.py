@@ -6,6 +6,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Results, Polls, Votes
 from werkzeug.urls import url_parse
 import itertools
+import random
 
 @app.route('/')
 @app.route('/index')
@@ -87,15 +88,42 @@ def vote():
     print('CHARACTERS',characters)
     print('METRICS',metrics)
     form = VoteForm()
-    '''i=0
-    for metric in metrics:
-        for char in characters:
-            form.add_button(char[0],char[1],str(i))
-            i=i+1
-    '''
+
+    #GENERATES random selection of 10 metrics/character pairs
+    num_metrics = len(metrics)
+    num_characters = len(characters)
+    random_pairs = random.sample(range(num_characters),2)*5
+    random_metrics = [0] + random.sample(range(num_metrics),3)*3
+
+
+
+    #MAJOR issues creating forms dynamically so have to do it old school
+    form.radio_button1.label.text = metrics[random_metrics[0]]
+    form.radio_button1.choices = [(1,characters[random_pairs[0]][0]),(2,characters[random_pairs[0]][1])]
+    form.radio_button2.label.text = metrics[random_metrics[1]]
+    form.radio_button2.choices = [(1,characters[random_pairs[1]][0]),(2,characters[random_pairs[1]][1])]
+    form.radio_button3.label.text = metrics[random_metrics[2]]
+    form.radio_button3.choices = [(1,characters[random_pairs[2]][0]),(2,characters[random_pairs[2]][1])]
+    form.radio_button4.label.text = metrics[random_metrics[3]]
+    form.radio_button4.choices = [(1,characters[random_pairs[3]][0]),(2,characters[random_pairs[3]][1])]
+    form.radio_button5.label.text = metrics[random_metrics[4]]
+    form.radio_button5.choices = [(1,characters[random_pairs[4]][0]),(2,characters[random_pairs[4]][1])]
+    form.radio_button6.label.text = metrics[random_metrics[5]]
+    form.radio_button6.choices = [(1,characters[random_pairs[5]][0]),(2,characters[random_pairs[5]][1])]
+    form.radio_button7.label.text = metrics[random_metrics[6]]
+    form.radio_button7.choices = [(1,characters[random_pairs[6]][0]),(2,characters[random_pairs[6]][1])]
+    form.radio_button8.label.text = metrics[random_metrics[7]]
+    form.radio_button8.choices = [(1,characters[random_pairs[7]][0]),(2,characters[random_pairs[7]][1])]
+    form.radio_button9.label.text = metrics[random_metrics[8]]
+    form.radio_button9.choices = [(1,characters[random_pairs[8]][0]),(2,characters[random_pairs[8]][1])]
+    form.radio_button10.label.text = metrics[random_metrics[9]]
+    form.radio_button10.choices = [(1,characters[random_pairs[9]][0]),(2,characters[random_pairs[9]][1])]
+
+    #AGAIN MAJOR issues submitting forms dynamically so doing it for fixed amounts of votes.
     if form.is_submitted():
         first_char = form.radio_button.choices[0][1]
         second_char = form.radio_button.choices[1][1]
+
         print(form.radio_button.data)
         if int(form.radio_button.data) == 1:
             new_vote = Votes(
@@ -128,3 +156,5 @@ def vote():
         print(form.errors)
 
     return render_template('vote.html', title='Vote', form=form, metrics=metrics, characters=characters)
+
+            #might need to indent this

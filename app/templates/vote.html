@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% for message in form.radio_button.errors %}
+{% for message in form.errors %}
         <div>{{ message }}</div>
      {% endfor %}
 
@@ -10,9 +10,10 @@
         {{ form.hidden_tag() }}
         <br>
          <div style = font-size:20px; font-weight:bold; margin-left:150px;>
-        {{ form.radio_button.label }}
-        {{ form.radio_button() }}
-        <p>{{ form.submit() }}</p>
+          {% for field in form %}
+              {{ field.label }}
+              {{ field }}
+          {% endfor %}
         </div>
     </form>
 {% endblock %}
