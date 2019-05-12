@@ -70,6 +70,8 @@ def results():
 # retrieves/adds polls from/to the database
 @app.route('/createpoll', methods=['GET', 'POST'])
 def createpoll():
+    metrics = [poll.metric for poll in Polls.query.all()]
+    characters = [character.character for character in Results.query.filter_by(metric='speed')]
     form = CreatePollForm()
     if form.validate_on_submit():
         poll = Polls(user_id=current_user.username,
@@ -78,7 +80,7 @@ def createpoll():
         db.session.commit()
         flash('Poll created!')
 
-    return render_template('createpoll.html', title='Polls', form=form)
+    return render_template('createpoll.html', title='Polls', form=form, metrics=metrics, characters=characters)
 
 
 
