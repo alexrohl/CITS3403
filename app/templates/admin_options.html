@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+<!-- Page to ADD POLLS (METRICS), DELETE POLLS (METRICS), ADD CHARACTERS, DELETE CHARACTERS -->
+{% block content %}
+    <h1>Characters</h1>
+    {% for character in characters %}
+    {{ character }}<br>
+    {% endfor %}
+    <h1>Polls</h1>
+    {% for metric in metrics %}
+    {{ metric }} <br>
+    {% endfor %}
+    {{ form2.radio_button.label }}
+    {{ form2.radio_button }}
+    <h1>Create a Poll</h1>
+    <form action="" method="post">
+        {{ form1.hidden_tag() }}
+        <p>
+            {{ form1.metric.label }}<br>
+            {{ form1.metric(size=32) }}<br>
+            {% for error in form1.metric.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form1.submit() }}</p>
+    </form>
+    <h1> Add a Character </h1>
+    <form action="" method="post">
+        {{ form3.hidden_tag() }}
+        <p>
+            {{ form3.character.label }}<br>
+            {{ form3.character(size=32) }}<br>
+            {% for error in form3.character.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form3.submit() }}</p>
+    </form>
+{% endblock %}

@@ -1,9 +1,9 @@
 from os import getenv
 from flask import render_template, flash, redirect, url_for, request, Blueprint, request, jsonify, session
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, CreatePollForm, VotingForm, VoteForm
+from app.forms import LoginForm, RegistrationForm, CreatePollForm, DeletePollForm, CreateCharacterForm, DeleteCharacterForm, VoteForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Results, Polls, Votes
+from app.models import User, Results, Polls, Votes, Characters
 from werkzeug.urls import url_parse
 import itertools
 import random
@@ -12,18 +12,15 @@ import random
 @app.route('/index')
 @login_required
 def index():
-    user = {'username': 'Zenn'}
-    posts = [
-        {
-            'author': {'username': 'Lachie'},
-            'body': 'Flexin everyday'
-        },
-        {
-            'author': {'username': 'Zenn'},
-            'body': 'Spinning rainbow squares!'
-        }
-    ]
-    return render_template('index.html', title='Home Page', posts=posts)
+    recent_votes = [vote.to_json() for vote in Votes.query.all()][-5:]
+    users = [user.to_json() for user in User.query.all()]
+    #make a function to match stuff..?
+    for vote in recent_votes:
+        for user in users:
+            if vote['user_id'] == user['id']:
+                vote['user_id'] = user['username']
+                break
+    return render_template('index.html', title='Home Page', results=recent_votes)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -68,19 +65,43 @@ def results():
     return render_template('results.html', title='Results Page', results = results)
 
 # retrieves/adds polls from/to the database
-@app.route('/createpoll', methods=['GET', 'POST'])
-def createpoll():
+@app.route('/admin_options', methods=['GET', 'POST'])
+def admin_options():
     metrics = [poll.metric for poll in Polls.query.all()]
-    characters = [character.character for character in Results.query.filter_by(metric='speed')]
-    form = CreatePollForm()
-    if form.validate_on_submit():
+    characters = [character.character for character in Characters.query.all()]
+
+
+    form1 = CreatePollForm()
+    form2 = DeletePollForm()
+    choices = [(x,x) for x in metrics]
+    form2.radio_button.choices = choices
+    form3 = CreateCharacterForm()
+    form4 = DeleteCharacterForm()
+
+    #let admins create new metrics to be voted on
+    if form1.validate_on_submit():
         poll = Polls(user_id=current_user.username,
-                     metric=form.metric.data)
+                     metric=form1.metric.data)
         db.session.add(poll)
         db.session.commit()
         flash('Poll created!')
 
-    return render_template('createpoll.html', title='Polls', form=form, metrics=metrics, characters=characters)
+    #let admins delete metrics
+    elif form2.validate_on_submit():
+        return
+
+    #let admins create new characters to be voted
+
+    elif form3.validate_on_submit():
+        new_character = Characters(user_id=current_user.username,
+                     character=form3.character.data)
+        db.session.add(new_character)
+        db.session.commit()
+        flash('Character added!')
+
+    #let admins delete metrics
+
+    return render_template('admin_options.html', form1=form1, form2=form2, form3=form3, form4=form4, metrics=metrics, characters=characters)
 
 
 
@@ -90,7 +111,7 @@ CREATE THE FORMS DYNAMICALLY FOR ALL THE DATA '''
 @app.route('/vote', methods=['GET', 'POST'])
 def vote():
     metrics = [poll.metric for poll in Polls.query.all()]
-    characters = [character.character for character in Results.query.filter_by(metric='speed')]
+    characters = [character.character for character in Characters.query.all()]
     characters = list(itertools.combinations(characters,2))
     print('CHARACTERS',characters)
     print('METRICS',metrics)
@@ -101,8 +122,6 @@ def vote():
     num_characters = len(characters)
     random_pairs = random.sample(range(num_characters),2)*5
     random_metrics = [0] + random.sample(range(num_metrics),3)*3
-
-
 
     #MAJOR issues creating forms dynamically so have to do it old school
     form.radio_button1.label.text = metrics[random_metrics[0]]

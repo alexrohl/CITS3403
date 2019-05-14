@@ -23,6 +23,7 @@ class User(UserMixin, db.Model):
 
     def to_json(self):
         return {
+            'id': self.id,
             'username': self.username,
             'email': self.email,
             'password_hash': self.password_hash
@@ -75,7 +76,7 @@ class Votes(db.Model):
 
 class Polls(db.Model):
         id = db.Column(db.Integer, primary_key=True)
-        user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+        user_id = db.Column(db.Integer)
         metric = db.Column(db.String(140), db.ForeignKey('results.metric'))
 
         def to_json(self):
@@ -83,6 +84,19 @@ class Polls(db.Model):
                 'id': self.id,
                 'user_id': self.user_id,
                 'metric': self.metric,
+                }
+
+class Characters(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+        character = db.Column(db.String(140))
+        #extra info = db.Column(db.String(140), db.ForeignKey('results.metric'))
+
+        def to_json(self):
+            return {
+                'id': self.id,
+                'user_id': self.user_id,
+                'character': self.character,
                 }
 
 

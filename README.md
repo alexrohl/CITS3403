@@ -15,7 +15,8 @@ pip install flask-migrate
 pip install flask-login
 
 
-Farruh's Job
+@@ Farruh's Job @@
+Write the following functions in order to do the following:
 
 Votes looks like
 id, user_id, alpha, beta, metric
@@ -26,19 +27,19 @@ Turn into Results table: id, character, metric, score
 e.g. 1, "Iron Man", Speed, 1300
      2, "Thor", Speed, 1100
 
-function initialise_Results_Table(list_of_characters, list_of_metrics):
+1) function initialise_Results_Table(list_of_characters, list_of_metrics):
   for metric in list_of_metrics
     for char in list_of_characters:
-        new_row = Results(character = char, metric = metric, score = 1000)  #TABLENAME(field1='',field2='') makes a row  
+        >new_row = Results(character = char, metric = metric, score = 1000)  #TABLENAME(field1='',field2='') makes a row  
 
         db.session.add(new_row)
         db.session.commit()
 
-function update_elo(current_Results_Table, new_vote):
+2) function update_elo(current_Results_Table, new_vote):
     >update table
     return Results_Table
 
-function convert_old_votes_to_elo(initial_Results_Table, votes_table):
+3) function convert_old_votes_to_elo(empty_Results_Table, old_votes_table):
     initial_Results_Table()
     for vote in votes:
         update_elo(Results, vote)
