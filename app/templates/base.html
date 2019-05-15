@@ -39,14 +39,14 @@
   </head>
   <body>
       <div>
-          Microblog:
+          Ultimate Marvel Character Ranker:
           <a href="{{ url_for('index') }}">Home</a>
           {% if current_user.is_anonymous %}
           <a href="{{ url_for('login') }}">Login</a>
           {% else %}
           <a href="{{ url_for('logout') }}">Logout</a>
           <a href="{{ url_for('results') }}">Results</a>
-          <a href="{{ url_for('admin_options') }}">Create Poll</a>
+          <a href="{{ url_for('admin_options') }}">Admin Options</a>
           <a href="{{ url_for('vote') }}">Vote</a>
 
           {% endif %}

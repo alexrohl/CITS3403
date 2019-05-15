@@ -77,29 +77,52 @@ def admin_options():
     form2.radio_button.choices = choices
     form3 = CreateCharacterForm()
     form4 = DeleteCharacterForm()
+    chars = [(x,x) for x in characters]
+    form4.radio_button.choices = chars
 
     #let admins create new metrics to be voted on
     if form1.validate_on_submit():
         poll = Polls(user_id=current_user.username,
                      metric=form1.metric.data)
+
         db.session.add(poll)
         db.session.commit()
         flash('Poll created!')
+        return redirect(url_for('admin_options'))
 
     #let admins delete metrics
-    elif form2.validate_on_submit():
-        return
+    if form2.is_submitted():
+        metric_to_delete = form2.radio_button.data
+        for metric in Polls.query.all():
+            if metric.metric == metric_to_delete:
+                db.session.delete(metric)
+                db.session.commit()
+                flash('poll deleted!')
+                return redirect(url_for('admin_options'))
+
+
 
     #let admins create new characters to be voted
 
-    elif form3.validate_on_submit():
+    if form3.validate_on_submit():
         new_character = Characters(user_id=current_user.username,
                      character=form3.character.data)
         db.session.add(new_character)
         db.session.commit()
         flash('Character added!')
+        return redirect(url_for('admin_options'))
 
-    #let admins delete metrics
+
+    #let admins delete characters
+    if form2.is_submitted():
+        char_to_delete = form4.radio_button.data
+        for character in Characters.query.all():
+            if character.character == char_to_delete:
+                db.session.delete(character)
+                db.session.commit()
+                flash('character deleted!')
+                return redirect(url_for('admin_options'))
+
 
     return render_template('admin_options.html', form1=form1, form2=form2, form3=form3, form4=form4, metrics=metrics, characters=characters)
 
