@@ -91,6 +91,7 @@ var Barchart = function(options){
 var myBarchart = new Barchart(
     {
         canvas:myCanvas,
+        seriesName:"Vinyl records",
         padding:10,
         gridScale:5,
         gridColor:"#eeeeee",

@@ -14,7 +14,7 @@ pip install flask-migrate
 
 pip install flask-login
 
-https://mdbootstrap.com/docs/jquery/javascript/charts/
+https://code.tutsplus.com/tutorials/how-to-draw-bar-charts-using-javascript-and-html5-canvas--cms-28561
 
 @@ Farruh's Job @@
 Write the following functions in order to do the following:
