@@ -7,6 +7,7 @@ from app.models import User, Results, Polls, Votes, Characters
 from werkzeug.urls import url_parse
 import itertools
 import random
+import math
 
 @app.route('/')
 @app.route('/index')
@@ -62,25 +63,83 @@ def register():
 
 def initialise_Results_Table(characters, metrics):
     results = Results.query.all()
+    print(results)
     for r in results:
         db.session.delete(r)
-    for character in character:
+    print("results table cleaned")
+    for character in characters:
         for metric in metrics:
-            new_result = Result(character=character, metric=metric, score = 1000)
+            new_result = Results(character=character, metric=metric, score = 1000)
+            print(new_result)
+            db.session.add(new_result)
+            db.session.commit()
+    print([result for result in Results.query.all()])
+    return
 
-def update_Results_table(results_rows,beta_character,alpha_character):
-    return 
+def Probability(rating1, rating2):
+    return 1.0 * 1.0 / (1 + 1.0 * math.pow(10, 1.0 * (rating1 - rating2) / 400))
+'''
+def EloRating(Ra, Rb, K, d):
+
+
+    # To calculate the Winning
+    # Probability of Player B
+    Pb = Probability(Ra, Rb)
+
+    # To calculate the Winning
+    # Probability of Player A
+    Pa = Probability(Rb, Ra)
+
+    # Case -1 When Player A wins
+    # Updating the Elo Ratings
+    if (d == 1) :
+        Ra = Ra + K * (1 - Pa)
+        Rb = Rb + K * (0 - Pb)
+
+
+    # Case -2 When Player B wins
+    # Updating the Elo Ratings
+    else :
+        Ra = Ra + K * (0 - Pa)
+        Rb = Rb + K * (1 - Pb)
+'''
+
+#updates the Results table for each sequential vote
+def update_Results_table(results_rows,beta_character,alpha_character,metric):
+    K=30 #elo ranking constant
+    for row_alpha in results_rows:
+        if row_alpha.metric == metric and row_alpha.character == alpha_character:
+            alpha_score = row_alpha.score
+            break
+    for row_beta in results_rows:
+        if row_beta.metric == metric and row_beta.character == beta_character:
+            beta_score = row_beta.score
+            break
+    P_alpha = Probability(alpha_score, beta_score)
+    P_beta = Probability(beta_score, alpha_score)
+    new_alpha_score = alpha_score + K * (1-P_alpha)
+    new_beta_score = beta_score + K * (1-P_beta)
+    #update scores
+    row_alpha.score = new_alpha_score
+    row_beta.score = new_beta_score
+    db.session.commit()
+    return
 
 @app.route('/results', methods=['GET','POST'])
 def results():
-    results = [vote.to_json() for vote in Votes.query.all()]
-    characters = [character.to_json() for character in Characters.query.all()]
-    metrics = [metric.to_json() for metric in Polls.query.all()]
+    #votes = [vote.to_json() for vote in Votes.query.all()]
+    characters = [character.character for character in Characters.query.all()]
+    metrics = [metric.metric for metric in Polls.query.all()]
 
-    #
+    initialise_Results_Table(characters, metrics)
+    for vote in Votes.query.all():
+        beta_character = vote.beta_character
+        alpha_character = vote.alpha_character
+        metric = vote.metric
+        results_rows = [result for result in Results.query.all()]
+        update_Results_table(results_rows,beta_character,alpha_character,metric)
 
-
-
+    results = [result.to_json() for result in Results.query.all()]
 
     return render_template('results.html', title='Results Page', results = results)
 
