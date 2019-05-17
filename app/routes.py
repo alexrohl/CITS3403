@@ -68,11 +68,16 @@ def initialise_Results_Table(characters, metrics):
         for metric in metrics:
             new_result = Result(character=character, metric=metric, score = 1000)
 
+def update_Results_table(results_rows,beta_character,alpha_character):
+    return 
+
 @app.route('/results', methods=['GET','POST'])
 def results():
     results = [vote.to_json() for vote in Votes.query.all()]
     characters = [character.to_json() for character in Characters.query.all()]
     metrics = [metric.to_json() for metric in Polls.query.all()]
+
+    #
 
 
 
@@ -113,6 +118,14 @@ def admin_options():
                 db.session.delete(metric)
                 db.session.commit()
                 flash('poll deleted!')
+
+                #delete all instances of metric in the votes table
+                for vote in Votes.query.all():
+                    if vote.metric == metric_to_delete:
+                        db.session.delete(vote)
+                        db.session.commit()
+                        flash('votes table updated!')
+
                 return redirect(url_for('admin_options'))
 
 
@@ -136,6 +149,14 @@ def admin_options():
                 db.session.delete(character)
                 db.session.commit()
                 flash('character deleted!')
+
+                #delete all instances of character in the votes table
+                for vote in Votes.query.all():
+                    if vote.alpha_character == char_to_delete or vote.beta_character == char_to_delete:
+                        db.session.delete(vote)
+                        db.session.commit()
+                        flash('votes table updated!')
+
                 return redirect(url_for('admin_options'))
 
 
