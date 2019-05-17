@@ -59,9 +59,24 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
+
+def initialise_Results_Table(characters, metrics):
+    results = Results.query.all()
+    for r in results:
+        db.session.delete(r)
+    for character in character:
+        for metric in metrics:
+            new_result = Result(character=character, metric=metric, score = 1000)
+
 @app.route('/results', methods=['GET','POST'])
 def results():
     results = [vote.to_json() for vote in Votes.query.all()]
+    characters = [character.to_json() for character in Characters.query.all()]
+    metrics = [metric.to_json() for metric in Polls.query.all()]
+
+
+
+
     return render_template('results.html', title='Results Page', results = results)
 
 # retrieves/adds polls from/to the database

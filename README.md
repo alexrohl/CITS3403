@@ -46,3 +46,10 @@ e.g. 1, "Iron Man", Speed, 1300
 
 OTHER JOBS
 Make the website look cool
+
+
+<!-- IF WE WANT AN ADMIN VIEW BUTTON
+<div class="col-lg-3">
+  <a href="{{ url_for('AdminHome')}}" id="headerButton"><b>Administrator View</b></a>
+</div>
+-->

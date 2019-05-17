@@ -4,12 +4,28 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <style>
     body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
     body {font-size: 16px;}
     img {margin-bottom: -8px;}
     body,h1,h2,h3,h4,h5 {padding: 10px;}
     .mySlides {display: none;}
+    nav {
+      text-align: center;
+      padding; 0px;
+      margin_top: 0px;
+    }
+
+    a:link, a:visted {
+      font-size: large;
+      text-decoration: none;
+    }
+
+    <nav>
+      <div id="bar"
     /*  HIDE RADIO
     [type=radio] {
       position: absolute;
@@ -38,7 +54,7 @@
     {% endif %}
   </head>
   <body>
-      <div>
+      <!--
           Ultimate Marvel Character Ranker:
           <a href="{{ url_for('index') }}">Home</a>
           {% if current_user.is_anonymous %}
@@ -50,8 +66,71 @@
           <a href="{{ url_for('vote') }}">Vote</a>
 
           {% endif %}
+      -->
+    <div id="topBanner" class="row">
+      <div class="col-lg-3">
+      </div>
+      <div class="col-lg-6">
+        <header>
+          <h1> Marvel Character Elo Ranker </h1>
+        </header>
       </div>
 
+    </div>
+
+    <nav>
+      <div id="bar" class="row">
+        <div class="col-lg-3">
+          <a href="{{ url_for('index')}}">
+            <div>
+              Home
+            </div>
+          </a>
+        </div>
+        {% if current_user.is_anonymous %}
+        <div class="col-lg-3">
+          <a href="{{ url_for('login') }}">
+            <div>
+              Login
+            </div>
+          </a>
+        </div>
+        {% else %}
+        <div class="col-lg-2">
+          <a href="{{ url_for('logout') }}">
+            <div>
+              Logout
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-2">
+          <a href="{{ url_for('vote') }}">
+            <div>
+              Vote
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-2">
+          <a href="{{ url_for('results') }}">
+            <div>
+              Results
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-2">
+          <a href="{{ url_for('admin_options') }}">
+            <div>
+              Admin Options
+            </div>
+          </a>
+        </div>
+        {% endif %}
+
+      </div>
+    </nav>
   <hr>
 
       {% with messages = get_flashed_messages() %}
