@@ -1,30 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% for message in form.errors %}
+        <div>{{ message }}</div>
+     {% endfor %}
+
     <h1>Vote!</h1>
-    <form action="" method="post">
+    <form class="rad",action="" method="post">
         {{ form.hidden_tag() }}
-        <p>
-            {{ form.metric.label }}<br>
-            {{ form.metric(size=32) }}<br>
-            {% for error in form.metric.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.character_alpha.label }}<br>
-            {{ form.character_alpha(size=64) }}<br>
-            {% for error in form.character_alpha.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.character_beta.label }}<br>
-            {{ form.character_beta(size=32) }}<br>
-            {% for error in form.character_beta.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>{{ form.submit() }}</p>
+        <br>
+         <div style = font-size:20px; font-weight:bold; margin-left:150px;>
+          {% for field in form %}
+              {{ field.label }}
+              {{ field }}
+          {% endfor %}
+
+        </div>
     </form>
 {% endblock %}

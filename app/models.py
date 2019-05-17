@@ -21,6 +21,14 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+    def to_json(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'password_hash': self.password_hash
+            }
+
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
@@ -36,27 +44,60 @@ class Results(db.Model):
     metric = db.Column(db.String(140))
     score = db.Column(db.Integer)
 
+    def to_json(self):
+        return {
+            'id': self.id,
+            'character': self.character,
+            'metric': self.metric,
+            'score': self.score
+            }
+
     def __repr__(self):
         return '<Results {}>'.format(self.character)
 
 class Votes(db.Model):
         id = db.Column(db.Integer, primary_key=True)
-        user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-        alpha_character = db.Column(db.String(140), db.ForeignKey('results.character'))
-        beta_character = db.Column(db.String(140), db.ForeignKey('results.character'))
-        metric = db.Column(db.String(140), db.ForeignKey('results.metric'))
+        user_id = db.Column(db.Integer)
+        alpha_character = db.Column(db.String(140), index=True)
+        beta_character = db.Column(db.String(140), index=True)
+        metric = db.Column(db.String(140), index=True)
+
+        def __repr__(self):
+            return '<Vote {}>'.format(self.id)
 
         def to_json(self):
             return {
+                'id': self.id,
+                'user_id': self.user_id,
                 'metric': self.metric,
                 'alpha_character': self.alpha_character,
-                'beta_character': self.beta_character,
+                'beta_character': self.beta_character
                 }
 
 class Polls(db.Model):
         id = db.Column(db.Integer, primary_key=True)
-        user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+        user_id = db.Column(db.Integer)
         metric = db.Column(db.String(140), db.ForeignKey('results.metric'))
+
+        def to_json(self):
+            return {
+                'id': self.id,
+                'user_id': self.user_id,
+                'metric': self.metric,
+                }
+
+class Characters(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+        character = db.Column(db.String(140))
+        #extra info = db.Column(db.String(140), db.ForeignKey('results.metric'))
+
+        def to_json(self):
+            return {
+                'id': self.id,
+                'user_id': self.user_id,
+                'character': self.character,
+                }
 
 
 

@@ -2,7 +2,10 @@
 
 {% block content %}
     <h1>Hi, {{ current_user.username }}!</h1>
-    {% for post in posts %}
-    <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
+    {% for result in results %}
+    <!-- <div><p>{{ result.character }} has a {{ result.metric }} score of {{ result.score }}.</p></div> -->
+    <div>
+      <p>{{ result.user_id }} recently ranked {{ result.alpha_character }} above {{ result.beta_character }} in the metric {{ result.metric }}<p>
+    </div>
     {% endfor %}
 {% endblock %}

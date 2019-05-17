@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, RadioField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
-from app.models import User, Results
+from app.models import User, Results, Polls
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -27,14 +27,33 @@ class RegistrationForm(FlaskForm):
         if user is not None:
             raise ValidationError('Please use a different email address.')
 
-class VotingForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    metric = StringField('Metric', validators=[DataRequired()])
-    character_alpha = StringField('Alpha Character', validators=[DataRequired()])
-    character_beta = StringField('Beta Character', validators=[DataRequired()])
+class VoteForm(FlaskForm):
+    radio_button1 = RadioField('Default', choices=[(1,'Farruh'),(2,'is')])
+    radio_button2 = RadioField('Default', choices=[(1,'a'),(2,'dickhead')])
+    radio_button3 = RadioField('Default', choices=[(1,'lets'),(2,'see')])
+    radio_button4 = RadioField('Default', choices=[(1,'if'),(2,'he')])
+    radio_button5 = RadioField('Default', choices=[(1,'even'),(2,'notices')])
+    radio_button6 = RadioField('Default', choices=[(1,'this'),(2,'omg')])
+    radio_button7 = RadioField('Default', choices=[(1,'what'),(2,'a')])
+    radio_button8 = RadioField('Default', choices=[(1,'spud'),(2,'just')])
+    radio_button9 = RadioField('Default', choices=[(1,'do'),(2,'your')])
+    radio_button10 = RadioField('Default', choices=[(1,'work'),(2,'potato')])
+
     submit = SubmitField('Vote!')
 
+
 class CreatePollForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
     metric = StringField('Metric', validators=[DataRequired()])
-    submit = SubmitField('Submit Poll')
+    submit = SubmitField('Submit New Poll')
+
+class DeletePollForm(FlaskForm):
+    radio_button = RadioField('Select Metric', choices=[(1,'Farruh'),(2,'is')])
+    submit = SubmitField('Delete!')
+
+class CreateCharacterForm(FlaskForm):
+    character = StringField('Character', validators=[DataRequired()])
+    submit = SubmitField('Submit New Character')
+
+class DeleteCharacterForm(FlaskForm):
+    radio_button = RadioField('Select Character', choices=[(1,'Farruh'),(2,'is')])
+    submit = SubmitField('Delete')
