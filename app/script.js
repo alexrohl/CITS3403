@@ -21,12 +21,8 @@ function drawBar(ctx, upperLeftCornerX, upperLeftCornerY, width, height,color){
     ctx.restore();
 }
 
-var myVinyls = {
-    "Classical music": 10,
-    "Alternative rock": 14,
-    "Pop": 2,
-    "Jazz": 12
-};
+var myVinyls = {{ test_data }};
+print(myVinyls)
 
 var Barchart = function(options){
     this.options = options;
@@ -84,6 +80,15 @@ var Barchart = function(options){
 
             barIndex++;
         }
+
+        //drawing series name
+        this.ctx.save();
+        this.ctx.textBaseline="bottom";
+        this.ctx.textAlign="center";
+        this.ctx.fillStyle = "#000000";
+        this.ctx.font = "bold 14px Arial";
+        this.ctx.fillText(this.options.seriesName, this.canvas.width/2,this.canvas.height);
+        this.ctx.restore();
 
     }
 }

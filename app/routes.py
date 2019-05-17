@@ -93,10 +93,10 @@ def update_Results_table(results_rows,beta_character,alpha_character,metric):
     P_alpha = Probability(alpha_score, beta_score)
     P_beta = Probability(beta_score, alpha_score)
     new_alpha_score = alpha_score + K * (1-P_alpha)
-    new_beta_score = beta_score + K * (1-P_beta)
+    new_beta_score = beta_score + K * (0-P_beta)
     #update scores
-    row_alpha.score = new_alpha_score
-    row_beta.score = new_beta_score
+    row_alpha.score = int(new_alpha_score)
+    row_beta.score = int(new_beta_score)
     db.session.commit()
     return
 
@@ -115,8 +115,9 @@ def results():
         update_Results_table(results_rows,beta_character,alpha_character,metric)
 
     results = [result.to_json() for result in Results.query.all()]
+    test_data = [results[0:3]]
 
-    return render_template('results.html', title='Results Page', results = results)
+    return render_template('results.html', title='Results Page', results = results, test_data = test_data)
 
 # retrieves/adds polls from/to the database
 @app.route('/admin_options', methods=['GET', 'POST'])
