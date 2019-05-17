@@ -67,8 +67,8 @@ def initialise_Results_Table(characters, metrics):
     for r in results:
         db.session.delete(r)
     print("results table cleaned")
-    for character in characters:
-        for metric in metrics:
+    for metric in metrics:
+        for character in characters:
             new_result = Results(character=character, metric=metric, score = 1000)
             print(new_result)
             db.session.add(new_result)
@@ -78,31 +78,6 @@ def initialise_Results_Table(characters, metrics):
 
 def Probability(rating1, rating2):
     return 1.0 * 1.0 / (1 + 1.0 * math.pow(10, 1.0 * (rating1 - rating2) / 400))
-'''
-def EloRating(Ra, Rb, K, d):
-
-
-    # To calculate the Winning
-    # Probability of Player B
-    Pb = Probability(Ra, Rb)
-
-    # To calculate the Winning
-    # Probability of Player A
-    Pa = Probability(Rb, Ra)
-
-    # Case -1 When Player A wins
-    # Updating the Elo Ratings
-    if (d == 1) :
-        Ra = Ra + K * (1 - Pa)
-        Rb = Rb + K * (0 - Pb)
-
-
-    # Case -2 When Player B wins
-    # Updating the Elo Ratings
-    else :
-        Ra = Ra + K * (0 - Pa)
-        Rb = Rb + K * (1 - Pb)
-'''
 
 #updates the Results table for each sequential vote
 def update_Results_table(results_rows,beta_character,alpha_character,metric):

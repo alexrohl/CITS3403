@@ -14,6 +14,7 @@ pip install flask-migrate
 
 pip install flask-login
 
+https://mdbootstrap.com/docs/jquery/javascript/charts/
 
 @@ Farruh's Job @@
 Write the following functions in order to do the following:
