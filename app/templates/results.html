@@ -6,7 +6,7 @@
       .progress-container {height: 20px}
     </style>
     {% for result in results %}
-      {% if loop.index0 % characters|length == 0%}
+      {% if loop.index0 % characters|length == 0 %}
       <h2> {{ result.metric }} </h2>
       {% endif %}
       <div class="progress-container">
