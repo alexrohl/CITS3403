@@ -247,252 +247,228 @@ def vote():
         form.radio_button7.choices = [(1,characters[random_pairs[6]][0]),(2,characters[random_pairs[6]][1])]
         form.radio_button8.label.text = metrics[random_metrics[7]]
         form.radio_button8.choices = [(1,characters[random_pairs[7]][0]),(2,characters[random_pairs[7]][1])]
-        form.radio_button9.label.text = metrics[random_metrics[8]]
-        form.radio_button9.choices = [(1,characters[random_pairs[8]][0]),(2,characters[random_pairs[8]][1])]
-        form.radio_button10.label.text = metrics[random_metrics[9]]
-        form.radio_button10.choices = [(1,characters[random_pairs[9]][0]),(2,characters[random_pairs[9]][1])]
+        
 
         #AGAIN MAJOR issues submitting forms dynamically so doing it for fixed amounts of votes.
         if form.is_submitted():
+            count_votes = 0
             first_char = form.radio_button1.choices[0][1]
             second_char = form.radio_button1.choices[1][1]
-            if int(form.radio_button1.data) == 1:
-                new_vote = Votes(
-                                 user_id=current_user.id,
-                                 alpha_character=first_char,
-                                 beta_character=second_char,
-                                 metric=form.radio_button1.label.text
-                                 )
-                db.session.add(new_vote)
-                db.session.commit()
-                flash('Vote submitted!')
-            elif int(form.radio_button1.data) == 2:
-                new_vote = Votes(
-                                 user_id=current_user.id,
-                                 alpha_character=second_char,
-                                 beta_character=first_char,
-                                 metric=form.radio_button1.label.text
-                                 )
-                db.session.add(new_vote)
-                db.session.commit()
-            else:
-                print('fail')
+            try:
+                value = int(form.radio_button1.data)
+                if value == 1:
+                    new_vote = Votes(
+                                     user_id=current_user.id,
+                                     alpha_character=first_char,
+                                     beta_character=second_char,
+                                     metric=form.radio_button1.label.text
+                                     )
+                    db.session.add(new_vote)
+                    db.session.commit()
+                    count_votes += 1
+                elif value == 2:
+                    new_vote = Votes(
+                                     user_id=current_user.id,
+                                     alpha_character=second_char,
+                                     beta_character=first_char,
+                                     metric=form.radio_button1.label.text
+                                     )
+                    db.session.add(new_vote)
+                    db.session.commit()
+                    count_votes += 1
+            except ValueError:
+                print('button 1 fail')
 
             first_char = form.radio_button2.choices[0][1]
             second_char = form.radio_button2.choices[1][1]
-            if int(form.radio_button2.data) == 1:
-                new_vote = Votes(
-                                 user_id=current_user.id,
-                                 alpha_character=first_char,
-                                 beta_character=second_char,
-                                 metric=form.radio_button2.label.text
-                                 )
-                db.session.add(new_vote)
-                db.session.commit()
-                flash('Vote submitted!')
-            elif int(form.radio_button2.data) == 2:
-                new_vote = Votes(
-                                 user_id=current_user.id,
-                                 alpha_character=second_char,
-                                 beta_character=first_char,
-                                 metric=form.radio_button2.label.text
-                                 )
-                db.session.add(new_vote)
-                db.session.commit()
-            else:
-                print('fail')
+            try:
+                value = int(form.radio_button2.data)
+                if value == 1:
+                    new_vote = Votes(
+                                     user_id=current_user.id,
+                                     alpha_character=first_char,
+                                     beta_character=second_char,
+                                     metric=form.radio_button2.label.text
+                                     )
+                    db.session.add(new_vote)
+                    db.session.commit()
+                    count_votes += 1
+                elif value == 2:
+                    new_vote = Votes(
+                                     user_id=current_user.id,
+                                     alpha_character=second_char,
+                                     beta_character=first_char,
+                                     metric=form.radio_button2.label.text
+                                     )
+                    db.session.add(new_vote)
+                    db.session.commit()
+                    count_votes += 1
+            except ValueError:
+                print('button 2 fail')
 
             first_char = form.radio_button3.choices[0][1]
             second_char = form.radio_button3.choices[1][1]
-            if int(form.radio_button3.data) == 1:
-                new_vote = Votes(
-                                 user_id=current_user.id,
-                                 alpha_character=first_char,
-                                 beta_character=second_char,
-                                 metric=form.radio_button3.label.text
-                                 )
-                db.session.add(new_vote)
-                db.session.commit()
-                flash('Vote submitted!')
-            elif int(form.radio_button3.data) == 2:
-                new_vote = Votes(
-                                 user_id=current_user.id,
-                                 alpha_character=second_char,
-                                 beta_character=first_char,
-                                 metric=form.radio_button3.label.text
-                                 )
-                db.session.add(new_vote)
-                db.session.commit()
-            else:
-                print('fail')
+            try:
+                value = int(form.radio_button3.data)
+                if value == 1:
+                    new_vote = Votes(
+                                     user_id=current_user.id,
+                                     alpha_character=first_char,
+                                     beta_character=second_char,
+                                     metric=form.radio_button3.label.text
+                                     )
+                    db.session.add(new_vote)
+                    db.session.commit()
+                    count_votes += 1
+                elif value == 2:
+                    new_vote = Votes(
+                                     user_id=current_user.id,
+                                     alpha_character=second_char,
+                                     beta_character=first_char,
+                                     metric=form.radio_button3.label.text
+                                     )
+                    db.session.add(new_vote)
+                    db.session.commit()
+                    count_votes += 1
+            except ValueError:
+                print('button 3 fail')
 
             first_char = form.radio_button4.choices[0][1]
             second_char = form.radio_button4.choices[1][1]
-            if int(form.radio_button4.data) == 1:
-                new_vote = Votes(
-                                 user_id=current_user.id,
-                                 alpha_character=first_char,
-                                 beta_character=second_char,
-                                 metric=form.radio_button4.label.text
-                                 )
-                db.session.add(new_vote)
-                db.session.commit()
-                flash('Vote submitted!')
-            elif int(form.radio_button4.data) == 2:
-                new_vote = Votes(
-                                 user_id=current_user.id,
-                                 alpha_character=second_char,
-                                 beta_character=first_char,
-                                 metric=form.radio_button4.label.text
-                                 )
-                db.session.add(new_vote)
-                db.session.commit()
-            else:
-                print('fail')
+            try:
+                value = int(form.radio_button4.data)
+                if value == 1:
+                    new_vote = Votes(
+                                     user_id=current_user.id,
+                                     alpha_character=first_char,
+                                     beta_character=second_char,
+                                     metric=form.radio_button4.label.text
+                                     )
+                    db.session.add(new_vote)
+                    db.session.commit()
+                    count_votes += 1
+                elif value == 2:
+                    new_vote = Votes(
+                                     user_id=current_user.id,
+                                     alpha_character=second_char,
+                                     beta_character=first_char,
+                                     metric=form.radio_button4.label.text
+                                     )
+                    db.session.add(new_vote)
+                    db.session.commit()
+                    count_votes += 1
+            except ValueError:
+                print('button 1 fail')
 
             first_char = form.radio_button5.choices[0][1]
             second_char = form.radio_button5.choices[1][1]
-            if int(form.radio_button5.data) == 1:
-                new_vote = Votes(
-                                 user_id=current_user.id,
-                                 alpha_character=first_char,
-                                 beta_character=second_char,
-                                 metric=form.radio_button5.label.text
-                                 )
-                db.session.add(new_vote)
-                db.session.commit()
-                flash('Vote submitted!')
-            elif int(form.radio_button5.data) == 2:
-                new_vote = Votes(
-                                 user_id=current_user.id,
-                                 alpha_character=second_char,
-                                 beta_character=first_char,
-                                 metric=form.radio_button5.label.text
-                                 )
-                db.session.add(new_vote)
-                db.session.commit()
-            else:
+            try:
+                value = int(form.radio_button5.data)
+                if value == 1:
+                    new_vote = Votes(
+                                     user_id=current_user.id,
+                                     alpha_character=first_char,
+                                     beta_character=second_char,
+                                     metric=form.radio_button5.label.text
+                                     )
+                    db.session.add(new_vote)
+                    db.session.commit()
+                    count_votes += 1
+                elif value == 2:
+                    new_vote = Votes(
+                                     user_id=current_user.id,
+                                     alpha_character=second_char,
+                                     beta_character=first_char,
+                                     metric=form.radio_button5.label.text
+                                     )
+                    db.session.add(new_vote)
+                    db.session.commit()
+                    count_votes += 1
+            except ValueError:
                 print('button 5 fail')
 
             first_char = form.radio_button6.choices[0][1]
             second_char = form.radio_button6.choices[1][1]
-            if int(form.radio_button6.data) == 1:
-                new_vote = Votes(
-                                 user_id=current_user.id,
-                                 alpha_character=first_char,
-                                 beta_character=second_char,
-                                 metric=form.radio_button6.label.text
-                                 )
-                db.session.add(new_vote)
-                db.session.commit()
-                flash('Vote submitted!')
-            elif int(form.radio_button6.data) == 2:
-                new_vote = Votes(
-                                 user_id=current_user.id,
-                                 alpha_character=second_char,
-                                 beta_character=first_char,
-                                 metric=form.radio_button6.label.text
-                                 )
-                db.session.add(new_vote)
-                db.session.commit()
-            else:
+            try:
+                value = int(form.radio_button6.data)
+                if value == 1:
+                    new_vote = Votes(
+                                     user_id=current_user.id,
+                                     alpha_character=first_char,
+                                     beta_character=second_char,
+                                     metric=form.radio_button6.label.text
+                                     )
+                    db.session.add(new_vote)
+                    db.session.commit()
+                    count_votes += 1
+                elif value == 2:
+                    new_vote = Votes(
+                                     user_id=current_user.id,
+                                     alpha_character=second_char,
+                                     beta_character=first_char,
+                                     metric=form.radio_button6.label.text
+                                     )
+                    db.session.add(new_vote)
+                    db.session.commit()
+                    count_votes += 1
+            except ValueError:
                 print('button 6 fail')
 
             first_char = form.radio_button7.choices[0][1]
             second_char = form.radio_button7.choices[1][1]
-            if int(form.radio_button7.data) == 1:
-                new_vote = Votes(
-                                 user_id=current_user.id,
-                                 alpha_character=first_char,
-                                 beta_character=second_char,
-                                 metric=form.radio_button7.label.text
-                                 )
-                db.session.add(new_vote)
-                db.session.commit()
-                flash('Vote submitted!')
-            elif int(form.radio_button7.data) == 2:
-                new_vote = Votes(
-                                 user_id=current_user.id,
-                                 alpha_character=second_char,
-                                 beta_character=first_char,
-                                 metric=form.radio_button7.label.text
-                                 )
-                db.session.add(new_vote)
-                db.session.commit()
-            else:
+            try:
+                value = int(form.radio_button7.data)
+                if value == 1:
+                    new_vote = Votes(
+                                     user_id=current_user.id,
+                                     alpha_character=first_char,
+                                     beta_character=second_char,
+                                     metric=form.radio_button7.label.text
+                                     )
+                    db.session.add(new_vote)
+                    db.session.commit()
+                    count_votes += 1
+                elif value == 2:
+                    new_vote = Votes(
+                                     user_id=current_user.id,
+                                     alpha_character=second_char,
+                                     beta_character=first_char,
+                                     metric=form.radio_button7.label.text
+                                     )
+                    db.session.add(new_vote)
+                    db.session.commit()
+                    count_votes += 1
+            except ValueError:
                 print('button 7 fail')
 
             first_char = form.radio_button8.choices[0][1]
             second_char = form.radio_button8.choices[1][1]
-            if int(form.radio_button8.data) == 1:
-                new_vote = Votes(
-                                 user_id=current_user.id,
-                                 alpha_character=first_char,
-                                 beta_character=second_char,
-                                 metric=form.radio_button8.label.text
-                                 )
-                db.session.add(new_vote)
-                db.session.commit()
-                flash('Vote submitted!')
-            elif int(form.radio_button8.data) == 2:
-                new_vote = Votes(
-                                 user_id=current_user.id,
-                                 alpha_character=second_char,
-                                 beta_character=first_char,
-                                 metric=form.radio_button8.label.text
-                                 )
-                db.session.add(new_vote)
-                db.session.commit()
-            else:
+            try:
+                value = int(form.radio_button8.data)
+                if value == 1:
+                    new_vote = Votes(
+                                     user_id=current_user.id,
+                                     alpha_character=first_char,
+                                     beta_character=second_char,
+                                     metric=form.radio_button8.label.text
+                                     )
+                    db.session.add(new_vote)
+                    db.session.commit()
+                    count_votes += 1
+                elif value == 2:
+                    new_vote = Votes(
+                                     user_id=current_user.id,
+                                     alpha_character=second_char,
+                                     beta_character=first_char,
+                                     metric=form.radio_button8.label.text
+                                     )
+                    db.session.add(new_vote)
+                    db.session.commit()
+                    count_votes += 1
+            except ValueError:
                 print('button 8 fail')
 
-            first_char = form.radio_button9.choices[0][1]
-            second_char = form.radio_button9.choices[1][1]
-            if int(form.radio_button9.data) == 1:
-                new_vote = Votes(
-                                 user_id=current_user.id,
-                                 alpha_character=first_char,
-                                 beta_character=second_char,
-                                 metric=form.radio_button9.label.text
-                                 )
-                db.session.add(new_vote)
-                db.session.commit()
-                flash('Vote submitted!')
-            elif int(form.radio_button9.data) == 2:
-                new_vote = Votes(
-                                 user_id=current_user.id,
-                                 alpha_character=second_char,
-                                 beta_character=first_char,
-                                 metric=form.radio_button9.label.text
-                                 )
-                db.session.add(new_vote)
-                db.session.commit()
-            else:
-                print('button 9 fail')
-
-            first_char = form.radio_button10.choices[0][1]
-            second_char = form.radio_button10.choices[1][1]
-            if int(form.radio_button10.data) == 1:
-                new_vote = Votes(
-                                 user_id=current_user.id,
-                                 alpha_character=first_char,
-                                 beta_character=second_char,
-                                 metric=form.radio_button10.label.text
-                                 )
-                db.session.add(new_vote)
-                db.session.commit()
-                flash('Vote submitted!')
-            elif int(form.radio_button10.data) == 2:
-                new_vote = Votes(
-                                 user_id=current_user.id,
-                                 alpha_character=second_char,
-                                 beta_character=first_char,
-                                 metric=form.radio_button10.label.text
-                                 )
-                db.session.add(new_vote)
-                db.session.commit()
-            else:
-                print('button 10 fail')
+            flash(str(count_votes) + " votes submitted!")
 
         else:
             print('fail')

@@ -36,8 +36,6 @@ class VoteForm(FlaskForm):
     radio_button6 = RadioField('Default', choices=[(1,'this'),(2,'omg')])
     radio_button7 = RadioField('Default', choices=[(1,'what'),(2,'a')])
     radio_button8 = RadioField('Default', choices=[(1,'spud'),(2,'just')])
-    radio_button9 = RadioField('Default', choices=[(1,'do'),(2,'your')])
-    radio_button10 = RadioField('Default', choices=[(1,'work'),(2,'potato')])
 
     submit = SubmitField('Vote!')
 
