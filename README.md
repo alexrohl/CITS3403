@@ -14,7 +14,11 @@ pip install flask-migrate
 
 pip install flask-login
 
+<<<<<<< HEAD
+pip install flask-wtf
+=======
 https://code.tutsplus.com/tutorials/how-to-draw-bar-charts-using-javascript-and-html5-canvas--cms-28561
+>>>>>>> 99dc1ae48bb1ab55f22993c100cdcb4819db9c6c
 
 @@ Farruh's Job @@
 Write the following functions in order to do the following:
