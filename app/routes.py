@@ -226,8 +226,9 @@ def vote():
         can_vote = True
 
         #GENERATES random selection of 10 metrics/character pairs
-        random_pairs = random.sample(range(num_characters),2)*5
-        random_metrics = [0] + random.sample(range(num_metrics),3)*3
+        random_pairs = random.sample(range(num_characters),num_characters)*5
+        random_metrics = [0] + random.sample(range(num_metrics),num_metrics)*3
+        #make sure we atleast cover the fixed 10 options
 
         #MAJOR issues creating forms dynamically so have to do it old school
         form.radio_button1.label.text = metrics[random_metrics[0]]
