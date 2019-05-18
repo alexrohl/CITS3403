@@ -6,6 +6,7 @@
      {% endfor %}
 
     <h1>Vote!</h1>
+    {% if can_vote %}
     <form class="rad",action="" method="post">
         {{ form.hidden_tag() }}
         <br>
@@ -17,4 +18,7 @@
 
         </div>
     </form>
+    {% else %}
+    <h2> Not enough characters to vote! </h2>
+    {% endif %}
 {% endblock %}

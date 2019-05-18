@@ -22,7 +22,8 @@ function drawBar(ctx, upperLeftCornerX, upperLeftCornerY, width, height,color){
 }
 
 var myVinyls = {{ test_data }};
-print(myVinyls)
+console.log(myVinyls);
+
 
 var Barchart = function(options){
     this.options = options;

@@ -2,13 +2,25 @@
 
 {% block content %}
     <h1>Results of our polls!</h1>
+    <style>
+      .progress-container {height: 20px}
+    </style>
     {% for result in results %}
-    <!-- <div><p>{{ result.character }} has a {{ result.metric }} score of {{ result.score }}.</p></div> -->
-    <div><p>{{ result.character }} has a score of {{ result.score }} in metric {{ result.metric }}<p></div>
-    {% endfor %}
+      {% if loop.index0 % characters|length == 0%}
+      <h2> {{ result.metric }} </h2>
+      {% endif %}
+      <div class="progress-container">
+        <div style="width:50%">
+          <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar"
+          aria-valuenow="{{ result.score }}" aria-valuemin="0" aria-valuemax="3000" style="width:{{ percents[loop.index0] }}%">
+          {{ result.score }}
+          </div>
+        </div>
+        <p class="percentage-text">
+          &nbsp; {{ result.character }}
+        </p>
+      </div>
+      <br>
 
-    <canvas id="myCanvas" style="background: white;"></canvas>
-    <legend for="myCanvas"></legend>
-    <script src="https://cdn.jsdelivr.net/gh/alexrohl/CITS3403/app/script.js"></script>
-    <h2> Canvas </h2>
+    {% endfor %}
 {% endblock %}
