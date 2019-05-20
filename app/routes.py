@@ -122,7 +122,7 @@ def results():
         "char3": results[2]['score'],
         }
 
-    percents = [int(result.score/20) for result in Results.query.all()]
+    percents = [(result.score) for result in Results.query.all()]
     return render_template('results.html', title='Results Page', results = results, test_data = test_data,
     metrics = metrics, characters = characters, percents = percents)
 
@@ -162,11 +162,13 @@ def admin_options():
                 flash('poll deleted!')
 
                 #delete all instances of metric in the votes table
+                counter = 0
                 for vote in Votes.query.all():
                     if vote.metric == metric_to_delete:
                         db.session.delete(vote)
                         db.session.commit()
-                        flash('votes table updated!')
+                        counter += 1
+                flash(str(counter)+' instances of deletions in votes table')
 
                 return redirect(url_for('admin_options'))
 
@@ -193,11 +195,13 @@ def admin_options():
                 flash('character deleted!')
 
                 #delete all instances of character in the votes table
+                counter = 0
                 for vote in Votes.query.all():
                     if vote.alpha_character == char_to_delete or vote.beta_character == char_to_delete:
                         db.session.delete(vote)
                         db.session.commit()
-                        flash('votes table updated!')
+                        counter += 1
+                flash(str(counter)+' instances of deletions in votes table')
 
                 return redirect(url_for('admin_options'))
 
@@ -247,7 +251,7 @@ def vote():
         form.radio_button7.choices = [(1,characters[random_pairs[6]][0]),(2,characters[random_pairs[6]][1])]
         form.radio_button8.label.text = metrics[random_metrics[7]]
         form.radio_button8.choices = [(1,characters[random_pairs[7]][0]),(2,characters[random_pairs[7]][1])]
-        
+
 
         #AGAIN MAJOR issues submitting forms dynamically so doing it for fixed amounts of votes.
         if form.is_submitted():
@@ -469,6 +473,7 @@ def vote():
                 print('button 8 fail')
 
             flash(str(count_votes) + " votes submitted!")
+            return redirect(url_for('results'))
 
         else:
             print('fail')
