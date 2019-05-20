@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <div class="jumbotron" id="index1">
+    <div class="jumbotron" id="index1" >
       <div class="container">
         <h2>Hi, {{ current_user.username }}!</h2>
         <p>
@@ -14,7 +14,7 @@
         into an ELO ranking on the corresponding bar charts. Admin options: click on the 'Admin Options'
         navigation option, this will allow you to add/delete metrics and add/delete characters, which will
         update the votes/results view in real time. Enjoy ranking! </p>
-        <a class="btn btn-primary" href="#">VOTE</a>
+        <a href="{{ url_for('vote') }}" class="btn btn-primary btn-lg"">VOTE!</a>
       </div>
     </div>
 

@@ -2,22 +2,18 @@
 
 <html>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--
+
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
-<!--CDN for bootstrap-->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <style>
-  body,h1,h2,h3,h4,h5 {font-family: "Poppins"; color: #FFFFFF; font-style: sans-serif;}
+  body,h1,h2,h3,h4,h5 {font-family: "Poppins"; color: #FFFFFF; font-style: sans-serif; padding: 10px;}
   body {font-size: 16px; background-color: #101010}
   img {margin-bottom: -8px;}
-  body,h1,h2,h3,h4,h5 {padding: 10px;}
   .mySlides {display: none;}
 </*
   nav {
@@ -28,13 +24,12 @@
     color: #FFFFFF;
   }*/>
 
-
   a:link, a:visted {
     font-size: large;
     text-decoration: none;
   }
 
-  .jumbotron {background-color: red; font-size:}
+  .jumbotron {background-color: red; color: #fff }
 
   <nav>
     <div id="bar"
@@ -57,43 +52,44 @@
   } */
 
 </style>
-<head>
 
+<head>
   {% if title %}
-  <title>{{ title }} - Microblog</title>
+  <title>{{ title }} - Marvel Elo</title>
   {% else %}
-  <title>Welcome to Microblog</title>
+  <title>Welcome to Marvel Elo</title>
   {% endif %}
 </head>
 
 
 <body>
-    <!--
-        Ultimate Marvel Character Ranker:
-        <a href="{{ url_for('index') }}">Home</a>
+
+<div class="container-fluid">
+  <div class="page-header">
+    <h1 align="center">Marvel Character Elo Ranker</h1>
+
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header navbar-right">
+        <a class="logo navbar-brand" href="#">Marvel Character Elo Ranking</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{ url_for('index') }}">Home</a></li>
         {% if current_user.is_anonymous %}
-        <a href="{{ url_for('login') }}">Login</a>
+        <li><a href="{{ url_for('login') }}">Login</a></li>
         {% else %}
-        <a href="{{ url_for('logout') }}">Logout</a>
-        <a href="{{ url_for('results') }}">Results</a>
-        <a href="{{ url_for('admin_options') }}">Admin Options</a>
-        <a href="{{ url_for('vote') }}">Vote</a>
-
+        <li><a href="{{ url_for('vote') }}">Vote</a></li>
+        <li><a href="{{ url_for('results') }}">Results</a></li>
+        <li><a href="{{ url_for('admin_options') }}">Admin Options</a></li>
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
         {% endif %}
-    -->
-  <div id="topBanner" class="row">
-    <div class="col-lg-4">
+      </ul>
     </div>
-    <div class="col-lg-6">
-      <header>
-        <h1> Marvel Character Elo Ranker </h1>
-
-      </header>
-    </div>
-
-  </div>
+  </nav>
 
 
+<!--
 
   <nav>
     <div id="bar" class="row">
@@ -137,7 +133,6 @@
           </div>
         </a>
       </div>
-      {% endif %}
 
       <div class="col-lg-2">
         <a href="{{ url_for('logout') }}">
@@ -147,10 +142,12 @@
         </a>
       </div>
 
+      {% endif %}
     </div>
   </nav>
-<hr>
 -->
+
+<hr>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <ul>
@@ -167,6 +164,7 @@
     <footer>
       <p id="footer"><i>Created By:</i> Alex Rohl and Farruh Mavlonov <br> CITS3403</p>
     </footer>
+</div>
 
   <!--CDN for jQuery, popper, JS-->
   <!--Bootstrap core JavaScript-->

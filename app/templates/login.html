@@ -1,10 +1,9 @@
 <!--Login form template-->
-
 {% extends "base.html"%}
 
 {% block content %}
     <h1>Sign In</h1>
-    <form action="" method="post" novlaidate>
+    <form action="" method="post" novalidate style="color:#000000">
         {{ form.hidden_tag() }}
         <p>
             {{ form.username.label }}<br>
