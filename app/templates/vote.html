@@ -2,9 +2,45 @@
 
 {% block content %}
 {% for message in form.errors %}
-        <div>{{ message }}</div>
-     {% endfor %}
+  <div>{{ message }}</div>
+{% endfor %}
 
+<<<<<<< HEAD
+{% if can_vote %}
+<form class="rad", action="" method="post">
+  {{ form.hidden_tag() }}
+  <br>
+  <div style = font-size:20px; font-weight:bold>
+    <table class="table">
+      <tr>
+          <th colspan="2" text-align="center">Head to head voting</th>
+      </tr>
+
+      <tr>
+          <td>{{form.radio_button1.label}}<br>{{form.radio_button1}}</td>
+          <td>{{form.radio_button2.label}}<br>{{form.radio_button2}}</td>
+      </tr>
+      <tr>
+          <td>{{form.radio_button3.label}}<br>{{form.radio_button3}}</td>
+          <td>{{form.radio_button4.label}}<br>{{form.radio_button4}}</td>
+      </tr>
+      <tr>
+          <td>{{form.radio_button5.label}}<br>{{form.radio_button5}}</td>
+          <td>{{form.radio_button6.label}}<br>{{form.radio_button6}}</td>
+      </tr>
+      <tr>
+          <td>{{form.radio_button7.label}}<br>{{form.radio_button7}}</td>
+          <td>{{form.radio_button8.label}}<br>{{form.radio_button8}}</td>
+      </tr>
+    </table>
+  </div>
+  {{ form.submit() }}
+</form>
+
+{% else %}
+<h2> Not enough characters to vote! </h2>
+{% endif %}
+=======
     <h1>Vote!</h1>
     {% if can_vote %}
     <form class="rad",action="" method="post">
@@ -16,10 +52,6 @@
               {{ field }}
           {% endfor %}
           
+>>>>>>> 94747393b7c53196146ca2705f73e1fa4c517f09
 
-        </div>
-    </form>
-    {% else %}
-    <h2> Not enough characters to vote! </h2>
-    {% endif %}
 {% endblock %}

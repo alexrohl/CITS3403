@@ -1,6 +1,6 @@
 <!--Base template with navigation bar and footer-->
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,69 +10,45 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
+
 <style>
   body,h1,h2,h3,h4,h5 {font-family: "Poppins"; color: #FFFFFF; font-style: sans-serif; padding: 10px;}
   body {font-size: 16px; background-color: #101010}
   img {margin-bottom: -8px;}
+  table, th, td {border: 1px solid #fff; background-color: #B22222;}
+  th {color: "gray"; text-align: "center";}
   .mySlides {display: none;}
-</*
-  nav {
-    text-align: center;
-    padding; 0px;
-    margin_top: 0px;
-    background-color: red;
-    color: #FFFFFF;
-  }*/>
+  ul {list-style-type:none;}
 
   a:link, a:visted {
     font-size: large;
     text-decoration: none;
   }
 
-  .jumbotron {background-color: red; color: #fff }
+  [type="submit"] {background-color:red;}
 
-  <nav>
-    <div id="bar"
-  /*  HIDE RADIO
-  [type=radio] {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
-  /* IMAGE STYLES
-  [type=radio] + img {
-    cursor: pointer;
-  }
-
-  /* CHECKED STYLES
-  [type=radio]:checked + img {
-    outline: 2px solid #f00;
-  } */
-
+  .jumbotron {background-color: #B22222; color: #fff }
+  #title {font-size:50px;}
 </style>
 
 <head>
   {% if title %}
-  <title>{{ title }} - Marvel Elo</title>
+  <title>Marvel Elo Ranking - {{ title }}</title>
   {% else %}
   <title>Welcome to Marvel Elo</title>
   {% endif %}
 </head>
 
-
 <body>
 
 <div class="container-fluid">
   <div class="page-header">
-    <h1 align="center">Marvel Character Elo Ranker</h1>
+    <h1 align="center"><span id="title">MARVEL </span>Character Elo Ranker</h1>
 
-
-  <nav class="navbar navbar-inverse">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header navbar-right">
-        <a class="logo navbar-brand" href="#">Marvel Character Elo Ranking</a>
+        <a class="logo navbar-brand" href="{{ url_for('index') }}">Marvel Character Elo Ranker</a>
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="{{ url_for('index') }}">Home</a></li>
@@ -88,65 +64,6 @@
     </div>
   </nav>
 
-
-<!--
-
-  <nav>
-    <div id="bar" class="row">
-      <div class="col-lg-3">
-        <a href="{{ url_for('index')}}">
-          <div>
-            Home
-          </div>
-        </a>
-      </div>
-      {% if current_user.is_anonymous %}
-      <div class="col-lg-3">
-        <a href="{{ url_for('login') }}">
-          <div>
-            Login
-          </div>
-        </a>
-      </div>
-      {% else %}
-
-      <div class="col-lg-2">
-        <a href="{{ url_for('vote') }}">
-          <div>
-            Vote
-          </div>
-        </a>
-      </div>
-
-      <div class="col-lg-2">
-        <a href="{{ url_for('results') }}">
-          <div>
-            Results
-          </div>
-        </a>
-      </div>
-
-      <div class="col-lg-2">
-        <a href="{{ url_for('admin_options') }}">
-          <div>
-            Admin Options
-          </div>
-        </a>
-      </div>
-
-      <div class="col-lg-2">
-        <a href="{{ url_for('logout') }}">
-          <div>
-            Logout
-          </div>
-        </a>
-      </div>
-
-      {% endif %}
-    </div>
-  </nav>
--->
-
 <hr>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -161,6 +78,7 @@
 
     {% block content %}{% endblock %}
 
+<div>
     <footer>
       <p id="footer"><i>Created By:</i> Alex Rohl and Farruh Mavlonov <br> CITS3403</p>
     </footer>
@@ -169,9 +87,9 @@
   <!--CDN for jQuery, popper, JS-->
   <!--Bootstrap core JavaScript-->
   <!--Placed at the end of the page so that the pages load faster-->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </body>
 </html>
