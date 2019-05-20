@@ -1,155 +1,179 @@
+<!--Base template with navigation bar and footer-->
+
 <html>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <script> src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
+<!--CDN for bootstrap-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-  <style>
-    body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
-    body {font-size: 16px;}
-    img {margin-bottom: -8px;}
-    body,h1,h2,h3,h4,h5 {padding: 10px;}
-    .mySlides {display: none;}
-    nav {
-      text-align: center;
-      padding; 0px;
-      margin_top: 0px;
-    }
+<style>
+  body,h1,h2,h3,h4,h5 {font-family: "Poppins"; color: #FFFFFF; font-style: sans-serif;}
+  body {font-size: 16px; background-color: #101010}
+  img {margin-bottom: -8px;}
+  body,h1,h2,h3,h4,h5 {padding: 10px;}
+  .mySlides {display: none;}
+</*
+  nav {
+    text-align: center;
+    padding; 0px;
+    margin_top: 0px;
+    background-color: red;
+    color: #FFFFFF;
+  }*/>
 
-    a:link, a:visted {
-      font-size: large;
-      text-decoration: none;
-    }
 
-    <nav>
-      <div id="bar"
-    /*  HIDE RADIO
-    [type=radio] {
-      position: absolute;
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
+  a:link, a:visted {
+    font-size: large;
+    text-decoration: none;
+  }
 
-    /* IMAGE STYLES
-    [type=radio] + img {
-      cursor: pointer;
-    }
+  .jumbotron {background-color: red; font-size:}
 
-    /* CHECKED STYLES
-    [type=radio]:checked + img {
-      outline: 2px solid #f00;
-    } */
+  <nav>
+    <div id="bar"
+  /*  HIDE RADIO
+  [type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
 
-  </style>
-  <head>
+  /* IMAGE STYLES
+  [type=radio] + img {
+    cursor: pointer;
+  }
 
-    {% if title %}
-    <title>{{ title }} - Microblog</title>
-    {% else %}
-    <title>Welcome to Microblog</title>
-    {% endif %}
-  </head>
-  <body>
-      <!--
-          Ultimate Marvel Character Ranker:
-          <a href="{{ url_for('index') }}">Home</a>
-          {% if current_user.is_anonymous %}
-          <a href="{{ url_for('login') }}">Login</a>
-          {% else %}
-          <a href="{{ url_for('logout') }}">Logout</a>
-          <a href="{{ url_for('results') }}">Results</a>
-          <a href="{{ url_for('admin_options') }}">Admin Options</a>
-          <a href="{{ url_for('vote') }}">Vote</a>
+  /* CHECKED STYLES
+  [type=radio]:checked + img {
+    outline: 2px solid #f00;
+  } */
 
-          {% endif %}
-      -->
-    <div id="topBanner" class="row">
-      <div class="col-lg-4">
+</style>
+<head>
+
+  {% if title %}
+  <title>{{ title }} - Microblog</title>
+  {% else %}
+  <title>Welcome to Microblog</title>
+  {% endif %}
+</head>
+
+
+<body>
+    <!--
+        Ultimate Marvel Character Ranker:
+        <a href="{{ url_for('index') }}">Home</a>
+        {% if current_user.is_anonymous %}
+        <a href="{{ url_for('login') }}">Login</a>
+        {% else %}
+        <a href="{{ url_for('logout') }}">Logout</a>
+        <a href="{{ url_for('results') }}">Results</a>
+        <a href="{{ url_for('admin_options') }}">Admin Options</a>
+        <a href="{{ url_for('vote') }}">Vote</a>
+
+        {% endif %}
+    -->
+  <div id="topBanner" class="row">
+    <div class="col-lg-4">
+    </div>
+    <div class="col-lg-6">
+      <header>
+        <h1> Marvel Character Elo Ranker </h1>
+
+      </header>
+    </div>
+
+  </div>
+
+
+
+  <nav>
+    <div id="bar" class="row">
+      <div class="col-lg-3">
+        <a href="{{ url_for('index')}}">
+          <div>
+            Home
+          </div>
+        </a>
       </div>
-      <div class="col-lg-6">
-        <header>
-          <h1> Marvel Character Elo Ranker </h1>
-        </header>
+      {% if current_user.is_anonymous %}
+      <div class="col-lg-3">
+        <a href="{{ url_for('login') }}">
+          <div>
+            Login
+          </div>
+        </a>
+      </div>
+      {% else %}
+
+      <div class="col-lg-2">
+        <a href="{{ url_for('vote') }}">
+          <div>
+            Vote
+          </div>
+        </a>
+      </div>
+
+      <div class="col-lg-2">
+        <a href="{{ url_for('results') }}">
+          <div>
+            Results
+          </div>
+        </a>
+      </div>
+
+      <div class="col-lg-2">
+        <a href="{{ url_for('admin_options') }}">
+          <div>
+            Admin Options
+          </div>
+        </a>
+      </div>
+      {% endif %}
+
+      <div class="col-lg-2">
+        <a href="{{ url_for('logout') }}">
+          <div>
+            Logout
+          </div>
+        </a>
       </div>
 
     </div>
-
-    <nav>
-      <div id="bar" class="row">
-        <div class="col-lg-3">
-          <a href="{{ url_for('index')}}">
-            <div>
-              Home
-            </div>
-          </a>
-        </div>
-        {% if current_user.is_anonymous %}
-        <div class="col-lg-3">
-          <a href="{{ url_for('login') }}">
-            <div>
-              Login
-            </div>
-          </a>
-        </div>
-        {% else %}
-        <div class="col-lg-2">
-          <a href="{{ url_for('logout') }}">
-            <div>
-              Logout
-            </div>
-          </a>
-        </div>
-
-        <div class="col-lg-2">
-          <a href="{{ url_for('vote') }}">
-            <div>
-              Vote
-            </div>
-          </a>
-        </div>
-
-        <div class="col-lg-2">
-          <a href="{{ url_for('results') }}">
-            <div>
-              Results
-            </div>
-          </a>
-        </div>
-
-        <div class="col-lg-2">
-          <a href="{{ url_for('admin_options') }}">
-            <div>
-              Admin Options
-            </div>
-          </a>
-        </div>
-        {% endif %}
-
-      </div>
-    </nav>
-  <hr>
-
-      {% with messages = get_flashed_messages() %}
-      {% if messages %}
-      <ul>
-          {% for message in messages %}
-          <li>{{ message }}</li>
-          {% endfor %}
-      </ul>
-      {% endif %}
-      {% endwith %}
+  </nav>
+<hr>
+-->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
 
 
-      {% block content %}{% endblock %}
-      <footer>
-     <p>Created By: Alex Rohl <br>
-     CITS3403</p>
-   </footer>
-  </body>
+    {% block content %}{% endblock %}
+
+    <footer>
+      <p id="footer"><i>Created By:</i> Alex Rohl and Farruh Mavlonov <br> CITS3403</p>
+    </footer>
+
+  <!--CDN for jQuery, popper, JS-->
+  <!--Bootstrap core JavaScript-->
+  <!--Placed at the end of the page so that the pages load faster-->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
 </html>
