@@ -13,7 +13,7 @@
       {% if percents[loop.index0] == (percents[loop.index0-(loop.index0 % characters|length):loop.index0-(loop.index0 % characters|length)+characters|length]|sort)[-1] %}
 
       <div class="progress-container">
-        <div style="width:50%">
+        <div style="width:75%">
           <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar"
           aria-valuenow="{{ result.score }}" aria-valuemin="0" aria-valuemax="3000" style="width:{{ (percents[loop.index0])/20|int }}%">
           {{ result.score }}
@@ -26,7 +26,7 @@
       {% else %}
 
       <div class="progress-container">
-        <div style="width:50%">
+        <div style="width:70%">
           <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar"
           aria-valuenow="{{ result.score }}" aria-valuemin="0" aria-valuemax="3000" style="width:{{ (percents[loop.index0])/20|int  }}%">
           {{ result.score }}
