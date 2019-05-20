@@ -26,6 +26,8 @@ We outline the following:
 
     Then simply run 'flask run' in terminal and follow the instructions to run on your local host
 
+    Any other issues, please consolidate the requirements.txt file.
+
 4) Git logs:
 e77d30f - Alex Rohl, 20 minutes ago : Results now have an indicator of first place
 f8413c7 - Alex Rohl, 76 minutes ago : merge

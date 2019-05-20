@@ -10,10 +10,11 @@
       <h2> {{ result.metric }} </h2>
       {% endif %}
 
+      <!-- IF CHARACTER HAS MAX ELO SCORE IN METRIC -->
       {% if percents[loop.index0] == (percents[loop.index0-(loop.index0 % characters|length):loop.index0-(loop.index0 % characters|length)+characters|length]|sort)[-1] %}
 
       <div class="progress-container">
-        <div style="width:75%">
+        <div style="width:72%">
           <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar"
           aria-valuenow="{{ result.score }}" aria-valuemin="0" aria-valuemax="3000" style="width:{{ (percents[loop.index0])/20|int }}%">
           {{ result.score }}
@@ -23,6 +24,7 @@
           &nbsp; {{ result.character }}
         </p>
 
+      <!-- IF CHARACTER IS NOT THE MAXIMUM ELO SCORE IN METRIC -->
       {% else %}
 
       <div class="progress-container">
