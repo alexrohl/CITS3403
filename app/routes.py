@@ -122,7 +122,7 @@ def results():
         "char3": results[2]['score'],
         }
 
-    percents = [int(result.score/20) for result in Results.query.all()]
+    percents = [(result.score) for result in Results.query.all()]
     return render_template('results.html', title='Results Page', results = results, test_data = test_data,
     metrics = metrics, characters = characters, percents = percents)
 
@@ -473,6 +473,7 @@ def vote():
                 print('button 8 fail')
 
             flash(str(count_votes) + " votes submitted!")
+            return redirect(url_for('results'))
 
         else:
             print('fail')

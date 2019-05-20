@@ -2,6 +2,14 @@
 Project 2019
 Started 5th May 2019. Alex Rohl (22233158) and Farruh Mavlonov (22252282)
 
+We outline the following:
+1) the purpose of the web application, explaining both the context and the social choice mechanism used.
+2) the architecture of the web application
+3) describe how to launch the web application.
+4) Include commit logs, showing contributions and review from both contributing students
+
+1) The purpose of our web application is to allow users to rank marvel characters with respect to 
+
 may need to run in terminal:
 
 virtual venv
