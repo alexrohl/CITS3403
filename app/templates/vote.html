@@ -5,7 +5,6 @@
   <div>{{ message }}</div>
 {% endfor %}
 
-<<<<<<< HEAD
 {% if can_vote %}
 <form class="rad", action="" method="post">
   {{ form.hidden_tag() }}
@@ -40,18 +39,6 @@
 {% else %}
 <h2> Not enough characters to vote! </h2>
 {% endif %}
-=======
-    <h1>Vote!</h1>
-    {% if can_vote %}
-    <form class="rad",action="" method="post">
-        {{ form.hidden_tag() }}
-        <br>
-         <div style = font-size:20px; font-weight:bold; margin-left:150px;>
-          {% for field in form %}
-              {{ field.label }}
-              {{ field }}
-          {% endfor %}
-          
->>>>>>> 94747393b7c53196146ca2705f73e1fa4c517f09
+
 
 {% endblock %}

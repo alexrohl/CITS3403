@@ -1,6 +1,8 @@
 # CITS3403
 Project 2019
 Started 5th May 2019. Alex Rohl (22233158) and Farruh Mavlonov (22252282)
+Heroku deployment: https://marvel-elo.herokuapp.com/
+Github: https://github.com/alexrohl/CITS3403
 
 We outline the following:
 1) the purpose of the web application, explaining both the context and the social choice mechanism used.
