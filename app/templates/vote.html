@@ -5,7 +5,6 @@
   <div>{{ message }}</div>
 {% endfor %}
 
-<<<<<<< HEAD
 {% if can_vote %}
 <form class="rad", action="" method="post">
   {{ form.hidden_tag() }}
@@ -13,24 +12,24 @@
   <div style = font-size:20px; font-weight:bold>
     <table class="table">
       <tr>
-          <th colspan="2" text-align="center">Head to head voting</th>
+          <th colspan="2">Select your preferred character for the corresponding metric.</th>
       </tr>
 
       <tr>
-          <td>{{form.radio_button1.label}}<br>{{form.radio_button1}}</td>
-          <td>{{form.radio_button2.label}}<br>{{form.radio_button2}}</td>
+          <td><p3>{{form.radio_button1.label}}</p3>{{form.radio_button1}}</td>
+          <td><p3>{{form.radio_button2.label}}</p3>{{form.radio_button2}}</td>
       </tr>
       <tr>
-          <td>{{form.radio_button3.label}}<br>{{form.radio_button3}}</td>
-          <td>{{form.radio_button4.label}}<br>{{form.radio_button4}}</td>
+          <td><p3>{{form.radio_button3.label}}</p3>{{form.radio_button3}}</td>
+          <td><p3>{{form.radio_button4.label}}</p3>{{form.radio_button4}}</td>
       </tr>
       <tr>
-          <td>{{form.radio_button5.label}}<br>{{form.radio_button5}}</td>
-          <td>{{form.radio_button6.label}}<br>{{form.radio_button6}}</td>
+          <td><p3>{{form.radio_button5.label}}</p3>{{form.radio_button5}}</td>
+          <td><p3>{{form.radio_button6.label}}</p3>{{form.radio_button6}}</td>
       </tr>
       <tr>
-          <td>{{form.radio_button7.label}}<br>{{form.radio_button7}}</td>
-          <td>{{form.radio_button8.label}}<br>{{form.radio_button8}}</td>
+          <td><p3>{{form.radio_button7.label}}</p3>{{form.radio_button7}}</td>
+          <td><p3>{{form.radio_button8.label}}</p3>{{form.radio_button8}}</td>
       </tr>
     </table>
   </div>
@@ -40,18 +39,5 @@
 {% else %}
 <h2> Not enough characters to vote! </h2>
 {% endif %}
-=======
-    <h1>Vote!</h1>
-    {% if can_vote %}
-    <form class="rad",action="" method="post">
-        {{ form.hidden_tag() }}
-        <br>
-         <div style = font-size:20px; font-weight:bold; margin-left:150px;>
-          {% for field in form %}
-              {{ field.label }}
-              {{ field }}
-          {% endfor %}
-          
->>>>>>> 94747393b7c53196146ca2705f73e1fa4c517f09
 
 {% endblock %}
