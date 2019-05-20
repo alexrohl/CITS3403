@@ -3,17 +3,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+    <style>
+      p2 {
+        color:black;
+        font-weight: bold;
+      }
+    </style>
     <div class="jumbotron" id="index1" >
       <div class="container">
         <h2>Hi, {{ current_user.username }}!</h2>
         <p>
-        Welcome to the Marvel Character Elo Ranker. To vote: click on the 'Vote' navigation option
-        and select which of the following pairs of characters is superior for each metric. To see
-        results: click on the 'Results' navigation option and notice your votes have been transformed
-        into an ELO ranking on the corresponding bar charts. Admin options: click on the 'Admin Options'
+        Welcome to the Marvel Character Elo Ranker. <p2> To vote: </p2> click on the 'Vote' navigation option
+        and select which of the following pairs of characters is superior for each metric. <p2> To see
+        results: </p2> click on the 'Results' navigation option and notice your votes have been transformed
+        into an ELO ranking on the corresponding bar charts. <p2> Admin options: </p2> click on the 'Admin Options'
         navigation option, this will allow you to add/delete metrics and add/delete characters, which will
-        update the votes/results view in real time. Enjoy ranking! </p>
+        update the votes/results view in real time. <p2> Enjoy ranking! </p2> </p>
         <a href="{{ url_for('vote') }}" class="btn btn-primary btn-lg"">VOTE!</a>
       </div>
     </div>
